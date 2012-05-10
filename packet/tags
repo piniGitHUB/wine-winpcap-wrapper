@@ -1,0 +1,270 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ADAPTER	packet32.h	/^}  ADAPTER, *LPADAPTER;$/;"	t	typeref:struct:_ADAPTER
+ADAPTER_DESC_LENGTH	packet32.h	56;"	d
+ADAPTER_INFO	packet32.h	/^ADAPTER_INFO, *PADAPTER_INFO;$/;"	t	typeref:struct:_ADAPTER_INFO
+ADAPTER_NAME_LENGTH	packet32.h	23;"	d
+ADAPTER_NAME_LENGTH	packet32.h	55;"	d
+ALLCFLAGS	Makefile	/^ALLCFLAGS    = $(INCLUDES) $(DEFS) $(DLLFLAGS) $(EXTRACFLAGS) $(CPPFLAGS) $(CFLAGS) $(MODCFLAGS)$/;"	m
+ALLLINTFLAGS	Makefile	/^ALLLINTFLAGS = $(INCLUDES) $(DEFS) $(LINTFLAGS)$/;"	m
+ALL_LIBS	Makefile	/^ALL_LIBS    = $(LIBPORT) $(EXTRALIBS) $(LDFLAGS) $(LIBS)$/;"	m
+ALL_MO_FILES	Makefile	/^ALL_MO_FILES    = $(LINGUAS:%=..\/..\/po\/%.mo)$/;"	m
+AR	Makefile	/^AR              = ar$/;"	m
+ARFLAGS	Makefile	/^ARFLAGS         = rc$/;"	m
+Addr	packet32.h	/^        npf_if_addr Addr;$/;"	m	struct:_NPF_IF_ADDRESS_ITEM
+AirpcapAd	packet32.h	/^        PAirpcapHandle  AirpcapAd;$/;"	m	struct:_ADAPTER
+BASEMODULE	Makefile	/^BASEMODULE  = $(MODULE:%.dll=%)$/;"	m
+BIOCQUERYOID	packet32.h	115;"	d
+BIOCSETEVENTHANDLE	packet32.h	100;"	d
+BIOCSETOID	packet32.h	114;"	d
+BISON	Makefile	/^BISON           = bison$/;"	m
+BUILDIMAGE	Makefile	/^BUILDIMAGE      = $(top_srcdir)\/tools\/buildimage$/;"	m
+Broadcast	packet32.h	/^        struct sockaddr_storage Broadcast;$/;"	m	struct:npf_if_addr	typeref:struct:npf_if_addr::sockaddr_storage
+Buffer	packet32.h	/^        PVOID        Buffer;$/;"	m	struct:_PACKET
+C2MAN	Makefile	/^C2MAN           = $(top_srcdir)\/tools\/c2man.pl$/;"	m
+CC	Makefile	/^CC              = gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS          = -g -O0$/;"	m
+CLEAN_FILES	Makefile	/^CLEAN_FILES   = *.o *.a *.so *.mo *.ln *.res *.fake *.$(LIBEXT) \\\\\\#*\\\\\\# *~ *% .\\\\\\#* *.bak *.orig *.rej *.flc core$/;"	m
+CLEAN_TARGETS	Makefile	/^CLEAN_TARGETS = $(IDL_GEN_C_SRCS) $(IDL_GEN_HEADERS) $(IDL_TLB_SRCS:.idl=.tlb) $(IDL_P_SRCS:%=dlldata.c) \\$/;"	m
+CONVERT	Makefile	/^CONVERT         = convert$/;"	m
+CPPFLAGS	Makefile	/^CPPFLAGS        = -I\/usr\/include\/freetype2   $/;"	m
+CROSSAR	Makefile	/^CROSSAR         = $(CROSSTARGET)-ar$/;"	m
+CROSSCC	Makefile	/^CROSSCC         = $/;"	m
+CROSSOBJS	Makefile	/^CROSSOBJS = $(OBJS:.o=.cross.o)$/;"	m
+CROSSRANLIB	Makefile	/^CROSSRANLIB     = $(CROSSTARGET)-ranlib$/;"	m
+CROSSTARGET	Makefile	/^CROSSTARGET     = $/;"	m
+CROSSWINEGCC	Makefile	/^CROSSWINEGCC    = $(TOOLSDIR)\/tools\/winegcc\/winegcc $(CROSSTARGET:%=-b %) -B$(TOOLSDIR)\/tools\/winebuild --sysroot=$(top_builddir) --lib-suffix=.cross.a$/;"	m
+C_SRCS	Makefile	/^C_SRCS = \\$/;"	m
+DEFS	Makefile	/^DEFS        = -D__WINESRC__ $(EXTRADEFS)$/;"	m
+DEPEND_SRCS	Makefile	/^DEPEND_SRCS = $(C_SRCS) $(RC_SRCS) $(MC_SRCS) \\$/;"	m
+DEVICE_PREFIX	packet_main.c	155;"	d	file:
+DLLEXT	Makefile	/^DLLEXT          = .so$/;"	m
+DLLFLAGS	Makefile	/^DLLFLAGS    = -D_REENTRANT -fPIC$/;"	m
+DLLTOOL	Makefile	/^DLLTOOL         = $/;"	m
+DLLWRAP	Makefile	/^DLLWRAP         = $/;"	m
+DagBuffer	packet32.h	/^        PCHAR DagBuffer;$/;"	m	struct:_ADAPTER
+DagFastProcess	packet32.h	/^        DWORD DagFastProcess;$/;"	m	struct:_ADAPTER
+DagFcsLen	packet32.h	/^        unsigned DagFcsLen;$/;"	m	struct:_ADAPTER
+DagReadTimeout	packet32.h	/^        struct timeval DagReadTimeout;$/;"	m	struct:_ADAPTER	typeref:struct:_ADAPTER::timeval
+Data	packet32.h	/^    UCHAR Data[1];$/;"	m	struct:_PACKET_OID_DATA
+Description	packet32.h	/^        CHAR Description[ADAPTER_DESC_LENGTH + 1];$/;"	m	struct:_ADAPTER_INFO
+DllMain	packet_main.c	/^BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)$/;"	f
+EXEEXT	Makefile	/^EXEEXT          = $/;"	m
+EXTRACFLAGS	Makefile	/^EXTRACFLAGS     = -Wall -pipe -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wwrite-strings -fno-omit-frame-pointer -Wpointer-arith -Wlogical-op$/;"	m
+FAKEEXT	Makefile	/^FAKEEXT         = $(DLLEXT:.so=.fake)$/;"	m
+FLEX	Makefile	/^FLEX            = flex$/;"	m
+FONTFORGE	Makefile	/^FONTFORGE       = fontforge$/;"	m
+Flags	packet32.h	/^        UINT Flags;$/;"	m	struct:_ADAPTER
+Flags	packet32.h	/^        UINT Flags;$/;"	m	struct:_ADAPTER_INFO
+GAAHandler	packet_main.c	/^typedef VOID (*GAAHandler)( ULONG, DWORD, PVOID, PIP_ADAPTER_ADDRESSES , PULONG);$/;"	t	file:
+GlobalAllocPtr	packet32.h	10;"	d
+GlobalFreePtr	packet32.h	11;"	d
+GlobalPtrHandle	packet32.h	7;"	d
+GlobalUnlockPtr	packet32.h	8;"	d
+HAVE_INT16_T	bittypes.h	64;"	d
+HAVE_INT32_T	bittypes.h	83;"	d
+HAVE_INT8_T	bittypes.h	45;"	d
+HAVE_IPHELPER_API	packet_main.c	537;"	d	file:
+HAVE_U_INT16_T	bittypes.h	63;"	d
+HAVE_U_INT32_T	bittypes.h	82;"	d
+HAVE_U_INT8_T	bittypes.h	44;"	d
+ICOTOOL	Makefile	/^ICOTOOL         = icotool$/;"	m
+IDLFLAGS	Makefile	/^IDLFLAGS     = $(INCLUDES) $(DEFS) $(EXTRAIDLFLAGS)$/;"	m
+IDL_GEN_C_SRCS	Makefile	/^IDL_GEN_C_SRCS  = $(IDL_C_SRCS:.idl=_c.c) $(IDL_I_SRCS:.idl=_i.c) \\$/;"	m
+IDL_GEN_HEADERS	Makefile	/^IDL_GEN_HEADERS = $(IDL_H_SRCS:.idl=.h) $(IDL_C_SRCS:.idl=.h) $(IDL_I_SRCS:.idl=.h) \\$/;"	m
+IDL_TLB_RES	Makefile	/^IDL_TLB_RES = $(IDL_TLB_SRCS:.idl=_t.res)$/;"	m
+IMPLIBEXT	Makefile	/^IMPLIBEXT       = def$/;"	m
+IMPLIBFLAGS	Makefile	/^IMPLIBFLAGS = $(TARGETFLAGS) $(EXTRAIMPLIBFLAGS)$/;"	m
+IMPLIB_CROSSOBJS	Makefile	/^IMPLIB_CROSSOBJS = $(IMPLIB_OBJS:.o=.cross.o)$/;"	m
+IMPLIB_OBJS	Makefile	/^IMPLIB_OBJS = $(IMPLIB_SRCS:.c=.o)$/;"	m
+IMPORTLIBFILE	Makefile	/^IMPORTLIBFILE = $(IMPORTLIB:%=lib%.def)$/;"	m
+INADDR_NONE	packet32.h	96;"	d
+INCLUDES	Makefile	/^INCLUDES     = -I$(srcdir) -I. -I$(top_srcdir)\/include -I$(top_builddir)\/include $(EXTRAINCL)$/;"	m
+INFO_FLAG_DONT_EXPORT	packet32.h	90;"	d
+INFO_FLAG_NDIS_ADAPTER	packet32.h	99;"	d
+INSTALL	Makefile	/^INSTALL         = \/usr\/bin\/install -c $(INSTALL_FLAGS)$/;"	m
+INSTALLDIRS	Makefile	/^INSTALLDIRS = $(DESTDIR)$(dlldir) $(DESTDIR)$(fakedlldir) $(DESTDIR)$(datadir)\/wine$/;"	m
+INSTALL_DATA	Makefile	/^INSTALL_DATA    = ${INSTALL} -m 644 $(INSTALL_DATA_FLAGS)$/;"	m
+INSTALL_PROGRAM	Makefile	/^INSTALL_PROGRAM = ${INSTALL} $(INSTALL_PROGRAM_FLAGS)$/;"	m
+INSTALL_SCRIPT	Makefile	/^INSTALL_SCRIPT  = ${INSTALL} $(INSTALL_SCRIPT_FLAGS)$/;"	m
+IPAddress	packet32.h	/^        struct sockaddr_storage IPAddress;$/;"	m	struct:npf_if_addr	typeref:struct:npf_if_addr::sockaddr_storage
+LDFLAGS	Makefile	/^LDFLAGS         = -liphlpapi$/;"	m
+LDPATH	Makefile	/^LDPATH          = LD_LIBRARY_PATH="$(TOOLSDIR)\/libs\/wine:$$LD_LIBRARY_PATH"$/;"	m
+LDRPATH_INSTALL	Makefile	/^LDRPATH_INSTALL = -Wl,--rpath,\\$$ORIGIN\/`$(RELPATH) $(bindir) $(libdir)` -Wl,--enable-new-dtags$/;"	m
+LDRPATH_LOCAL	Makefile	/^LDRPATH_LOCAL   = -Wl,--rpath,\\$$ORIGIN\/$(top_builddir)\/libs\/wine$/;"	m
+LDSHARED	Makefile	/^LDSHARED     = $(CC) -shared $(SONAME:%=-Wl,-soname,%) $(VERSCRIPT:%=-Wl,--version-script=%)$/;"	m
+LIBEXT	Makefile	/^LIBEXT          = so$/;"	m
+LIBPORT	Makefile	/^LIBPORT         = $(top_builddir)\/libs\/port\/libwine_port.a$/;"	m
+LIBS	Makefile	/^LIBS            = $/;"	m
+LIBWINE	Makefile	/^LIBWINE         = -L$(top_builddir)\/libs\/wine -lwine$/;"	m
+LIBWPP	Makefile	/^LIBWPP          = $(top_builddir)\/libs\/wpp\/libwpp.a$/;"	m
+LINGUAS	Makefile	/^LINGUAS         = ar bg ca cs da de el en en_US eo es fa fi fr he hi hu it ja ko lt ml nb_NO nl or pa pl pt_BR pt_PT rm ro ru sk sl sr_RS@cyrillic sr_RS@latin sv te th tr uk wa zh_CN zh_TW$/;"	m
+LINT	Makefile	/^LINT            = $/;"	m
+LINTFLAGS	Makefile	/^LINTFLAGS       = $/;"	m
+LINTS	Makefile	/^LINTS  = $(C_SRCS:.c=.ln)$/;"	m
+LN_S	Makefile	/^LN_S            = ln -s$/;"	m
+LPADAPTER	packet32.h	/^}  ADAPTER, *LPADAPTER;$/;"	t	typeref:struct:_ADAPTER
+LPPACKET	packet32.h	/^}  PACKET, *LPPACKET;$/;"	t	typeref:struct:_PACKET
+LPTSTR	packet32.h	/^typedef LPSTR           PTSTR,       LPTSTR;$/;"	t
+Length	packet32.h	/^        UINT         Length;$/;"	m	struct:_PACKET
+Length	packet32.h	/^    ULONG Length;$/;"	m	struct:_PACKET_OID_DATA
+LinkLayer	packet32.h	/^        NetType LinkLayer;$/;"	m	struct:_ADAPTER_INFO
+LinkSpeed	packet32.h	/^        ULONGLONG LinkSpeed;$/;"	m	struct:NetType
+LinkType	packet32.h	/^        UINT LinkType;$/;"	m	struct:NetType
+MAINSPEC	Makefile	/^MAINSPEC    = $(BASEMODULE).spec$/;"	m
+MAKECTESTS	Makefile	/^MAKECTESTS      = $(TOOLSDIR)\/tools\/make_ctests$(TOOLSEXT)$/;"	m
+MAKEDEP	Makefile	/^MAKEDEP         = $(TOOLSDIR)\/tools\/makedep$(TOOLSEXT)$/;"	m
+MAKEXFTMPL	Makefile	/^MAKEXFTMPL      = $(TOOLSDIR)\/tools\/make_xftmpl$(TOOLSEXT)$/;"	m
+MANPAGES	Makefile	/^MANPAGES = $(MANPAGE) $(EXTRA_MANPAGES)$/;"	m
+MAX_LINK_NAME_LENGTH	packet32.h	22;"	d
+MAX_MAC_ADDR_LENGTH	packet32.h	57;"	d
+MAX_WINPCAP_KEY_CHARS	packet32.h	91;"	d
+MKINSTALLDIRS	Makefile	/^MKINSTALLDIRS   = $(top_srcdir)\/tools\/mkinstalldirs -m 755$/;"	m
+MODULE	Makefile	/^MODULE    = packet.dll$/;"	m
+MSGFMT	Makefile	/^MSGFMT          = msgfmt$/;"	m
+MV	Makefile	/^MV              = mv$/;"	m
+MacAddress	packet32.h	/^        UCHAR MacAddress[MAX_MAC_ADDR_LENGTH];$/;"	m	struct:_ADAPTER_INFO
+MacAddressLen	packet32.h	/^        UINT MacAddressLen;$/;"	m	struct:_ADAPTER_INFO
+NPF_DRIVER_COMPLETE_DEVICE_PREFIX	packet32.h	93;"	d
+NPF_DRIVER_NAME	packet32.h	92;"	d
+NPF_IF_ADDRESS_ITEM	packet32.h	/^} NPF_IF_ADDRESS_ITEM, *PNPF_IF_ADDRESS_ITEM;$/;"	t	typeref:struct:_NPF_IF_ADDRESS_ITEM
+Name	packet32.h	/^        CHAR Name[ADAPTER_NAME_LENGTH + 1];$/;"	m	struct:_ADAPTER_INFO
+Name	packet32.h	/^        CHAR Name[ADAPTER_NAME_LENGTH];$/;"	m	struct:_ADAPTER
+NetType	packet32.h	/^typedef struct NetType$/;"	s
+NetType	packet32.h	/^}NetType;$/;"	t	typeref:struct:NetType
+Next	packet32.h	/^        struct _ADAPTER_INFO *Next;$/;"	m	struct:_ADAPTER_INFO	typeref:struct:_ADAPTER_INFO::_ADAPTER_INFO
+Next	packet32.h	/^        struct _NPF_IF_ADDRESS_ITEM *Next;$/;"	m	struct:_NPF_IF_ADDRESS_ITEM	typeref:struct:_NPF_IF_ADDRESS_ITEM::_NPF_IF_ADDRESS_ITEM
+NpfImHandle	packet32.h	/^        void* NpfImHandle;$/;"	m	struct:_ADAPTER
+NumWrites	packet32.h	/^        int NumWrites;$/;"	m	struct:_ADAPTER
+OBJEXT	Makefile	/^OBJEXT          = o$/;"	m
+OBJS	Makefile	/^OBJS = $(C_SRCS:.c=.o) $(BISON_SRCS:.y=.tab.o) $(LEX_SRCS:.l=.yy.o) $(IDL_GEN_C_SRCS:.c=.o) \\$/;"	m
+OID_GEN_CURRENT_LOOKAHEAD	packet32.h	110;"	d
+OID_GEN_MAXIMUM_LOOKAHEAD	packet32.h	112;"	d
+Oid	packet32.h	/^    ULONG Oid;$/;"	m	struct:_PACKET_OID_DATA
+OverLapped	packet32.h	/^        OVERLAPPED   OverLapped;$/;"	m	struct:_PACKET
+PACKET	packet32.h	/^}  PACKET, *LPPACKET;$/;"	t	typeref:struct:_PACKET
+PACKET_OID_DATA	packet32.h	/^typedef struct _PACKET_OID_DATA PACKET_OID_DATA, *PPACKET_OID_DATA;$/;"	t	typeref:struct:_PACKET_OID_DATA
+PADAPTER_INFO	packet32.h	/^ADAPTER_INFO, *PADAPTER_INFO;$/;"	t	typeref:struct:_ADAPTER_INFO
+PNPF_IF_ADDRESS_ITEM	packet32.h	/^} NPF_IF_ADDRESS_ITEM, *PNPF_IF_ADDRESS_ITEM;$/;"	t	typeref:struct:_NPF_IF_ADDRESS_ITEM
+PORCFLAGS	Makefile	/^PORCFLAGS       = --po-dir=$(top_builddir)\/po$/;"	m
+PPACKET_OID_DATA	packet32.h	/^typedef struct _PACKET_OID_DATA PACKET_OID_DATA, *PPACKET_OID_DATA;$/;"	t	typeref:struct:
+PRELINK	Makefile	/^PRELINK         = \/usr\/sbin\/prelink$/;"	m
+PRId64	bittypes.h	108;"	d
+PRId64	bittypes.h	110;"	d
+PRIo64	bittypes.h	116;"	d
+PRIo64	bittypes.h	118;"	d
+PRIu64	bittypes.h	132;"	d
+PRIu64	bittypes.h	134;"	d
+PRIx64	bittypes.h	124;"	d
+PRIx64	bittypes.h	126;"	d
+PTSTR	packet32.h	/^typedef LPSTR           PTSTR,       LPTSTR;$/;"	t
+PWAN_ADAPTER	packet32.h	/^typedef WAN_ADAPTER *PWAN_ADAPTER;$/;"	t
+PacketAddAdapterIPH	packet_main.c	/^static BOOLEAN PacketAddAdapterIPH(PIP_ADAPTER_INFO IphAd)$/;"	f	file:
+PacketAllocatePacket	packet_main.c	/^LPPACKET PacketAllocatePacket(void)$/;"	f
+PacketCloseAdapter	packet_main.c	/^VOID PacketCloseAdapter (LPADAPTER lpAdapter)$/;"	f
+PacketDriverVersion	packet_main.c	/^char PacketDriverVersion[64] = "4.1.0.2001";$/;"	v
+PacketGetAdapterNames	packet_main.c	/^BOOLEAN PacketGetAdapterNames(PTSTR pStr,PULONG  BufferSize)$/;"	f
+PacketGetAdaptersIPH	packet_main.c	/^static BOOLEAN PacketGetAdaptersIPH()$/;"	f	file:
+PacketLibraryVersion	packet_main.c	/^char PacketLibraryVersion[64] = "4.1.0.2001";$/;"	v
+PacketLoadLibrariesDynamically	packet_main.c	/^VOID PacketLoadLibrariesDynamically()$/;"	f
+PacketOpenAdapter	packet_main.c	/^struct ADAPTER * PacketOpenAdapter(PCHAR AdapterNameWA)$/;"	f
+PacketOpenAdapterNPF	packet_main.c	/^LPADAPTER PacketOpenAdapterNPF(PCHAR AdapterNameA)$/;"	f
+PacketPopulateAdaptersInfoList	packet_main.c	/^VOID PacketPopulateAdaptersInfoList()$/;"	f
+PacketRequest	packet_main.c	/^BOOLEAN PacketRequest(LPADAPTER  AdapterObject,BOOLEAN Set,PPACKET_OID_DATA$/;"	f
+PacketSetMaxLookaheadsize	packet_main.c	/^BOOLEAN PacketSetMaxLookaheadsize (LPADAPTER AdapterObject)$/;"	f
+PacketSetReadEvt	packet_main.c	/^BOOLEAN PacketSetReadEvt(LPADAPTER AdapterObject)$/;"	f
+RANLIB	Makefile	/^RANLIB          = ranlib$/;"	m
+RCFLAGS	Makefile	/^RCFLAGS      = --nostdinc $(PORCFLAGS) $(TARGETFLAGS) $(INCLUDES) $(DEFS) $(EXTRARCFLAGS)$/;"	m
+RELPATH	Makefile	/^RELPATH         = $(TOOLSDIR)\/tools\/relpath$(TOOLSEXT)$/;"	m
+RM	Makefile	/^RM              = rm -f$/;"	m
+RSVG	Makefile	/^RSVG            = false$/;"	m
+RUNTEST	Makefile	/^RUNTEST         = $(top_srcdir)\/tools\/runtest$/;"	m
+ReadEvent	packet32.h	/^        HANDLE ReadEvent;$/;"	m	struct:_ADAPTER
+ReadTimeOut	packet32.h	/^        UINT ReadTimeOut;$/;"	m	struct:_ADAPTER
+SFNT2FNT	Makefile	/^SFNT2FNT        = $(TOOLSDIR)\/tools\/sfnt2fnt$(TOOLSEXT)$/;"	m
+SHELL	Makefile	/^SHELL           = \/bin\/sh$/;"	m
+SIZEOF_CHAR	pcap-stdinc.h	1;"	d
+SIZEOF_INT	pcap-stdinc.h	3;"	d
+SIZEOF_LONG_LONG	pcap-stdinc.h	5;"	d
+SIZEOF_SHORT	pcap-stdinc.h	2;"	d
+STATICIMPLIB	Makefile	/^STATICIMPLIB  = $(IMPORTLIBFILE:.def=.def.a)$/;"	m
+StringCchCopyA	packet_main.c	/^static void StringCchCopyA(char *pszDest,size_t cbDest, const char* pszSrc)$/;"	f	file:
+StringCchPrintfA	packet_main.c	/^static void StringCchPrintfA(char *pszDest,size_t cbDest, char *pszFormat, ...)$/;"	f	file:
+SubnetMask	packet32.h	/^        struct sockaddr_storage SubnetMask;$/;"	m	struct:npf_if_addr	typeref:struct:npf_if_addr::sockaddr_storage
+SymbolicLink	packet32.h	/^        CHAR  SymbolicLink[MAX_LINK_NAME_LENGTH];$/;"	m	struct:_ADAPTER
+TARGETFLAGS	Makefile	/^TARGETFLAGS     = $/;"	m
+TOOLSDIR	Makefile	/^TOOLSDIR        = $(top_builddir)$/;"	m
+TOOLSEXT	Makefile	/^TOOLSEXT        = $/;"	m
+WAN_ADAPTER	packet32.h	/^typedef struct WAN_ADAPTER_INT WAN_ADAPTER; \/\/\/< Describes an opened wan (dialup, VPN...) network adapter using the NetMon API$/;"	t	typeref:struct:WAN_ADAPTER_INT
+WIDL	Makefile	/^WIDL            = $(TOOLSDIR)\/tools\/widl\/widl$(TOOLSEXT)$/;"	m
+WINAPI_CHECK	Makefile	/^WINAPI_CHECK    = $(top_srcdir)\/tools\/winapi\/winapi_check$/;"	m
+WINEBUILD	Makefile	/^WINEBUILD       = $(TOOLSDIR)\/tools\/winebuild\/winebuild$(TOOLSEXT)$/;"	m
+WINEGCC	Makefile	/^WINEGCC         = $(TOOLSDIR)\/tools\/winegcc\/winegcc $(TARGETFLAGS) -B$(TOOLSDIR)\/tools\/winebuild --sysroot=$(top_builddir) -fasynchronous-unwind-tables$/;"	m
+WMC	Makefile	/^WMC             = $(TOOLSDIR)\/tools\/wmc\/wmc$(TOOLSEXT)$/;"	m
+WRC	Makefile	/^WRC             = $(TOOLSDIR)\/tools\/wrc\/wrc$(TOOLSEXT)$/;"	m
+_ADAPTER	packet32.h	/^typedef struct _ADAPTER  {$/;"	s
+_ADAPTER_INFO	packet32.h	/^typedef struct _ADAPTER_INFO$/;"	s
+_BITTYPES_H	bittypes.h	31;"	d
+_NPF_IF_ADDRESS_ITEM	packet32.h	/^typedef struct _NPF_IF_ADDRESS_ITEM$/;"	s
+_PACKET	packet32.h	/^typedef struct _PACKET {$/;"	s
+_PACKET_OID_DATA	packet32.h	/^struct _PACKET_OID_DATA {$/;"	s
+api_manext	Makefile	/^api_manext      = 3w$/;"	m
+bIoComplete	packet32.h	/^        BOOLEAN      bIoComplete;$/;"	m	struct:_PACKET
+bindir	Makefile	/^bindir          = ${exec_prefix}\/bin$/;"	m
+conf_manext	Makefile	/^conf_manext     = 5$/;"	m
+datadir	Makefile	/^datadir         = ${datarootdir}$/;"	m
+datarootdir	Makefile	/^datarootdir     = ${prefix}\/share$/;"	m
+dlldir	Makefile	/^dlldir          = ${exec_prefix}\/lib\/wine$/;"	m
+exec_prefix	Makefile	/^exec_prefix     = ${prefix}$/;"	m
+fakedlldir	Makefile	/^fakedlldir      = $(dlldir)\/fakedlls$/;"	m
+fontdir	Makefile	/^fontdir         = $(datadir)\/wine\/fonts$/;"	m
+g_AdaptersInfoList	packet_main.c	/^PADAPTER_INFO g_AdaptersInfoList = NULL;$/;"	v
+g_AdaptersInfoMutex	packet_main.c	/^HANDLE g_AdaptersInfoMutex = NULL;$/;"	v
+g_DynamicLibrariesLoaded	packet_main.c	/^volatile LONG g_DynamicLibrariesLoaded = 0;$/;"	v
+g_DynamicLibrariesMutex	packet_main.c	/^HANDLE g_DynamicLibrariesMutex;$/;"	v
+g_GetAdaptersAddressesPointer	packet_main.c	/^GAAHandler g_GetAdaptersAddressesPointer = NULL;$/;"	v
+hEvent	packet32.h	/^        HANDLE       hEvent;$/;"	m	struct:_PACKET
+hFile	packet32.h	/^        HANDLE hFile;$/;"	m	struct:_ADAPTER
+includedir	Makefile	/^includedir      = ${prefix}\/include\/wine$/;"	m
+infodir	Makefile	/^infodir         = ${datarootdir}\/info$/;"	m
+int16_t	bittypes.h	/^typedef signed char int16_t;$/;"	t
+int16_t	bittypes.h	/^typedef signed int int16_t;$/;"	t
+int16_t	bittypes.h	/^typedef signed short int16_t;$/;"	t
+int32_t	bittypes.h	/^typedef signed int int32_t;$/;"	t
+int32_t	bittypes.h	/^typedef signed long int32_t;$/;"	t
+int32_t	bittypes.h	/^typedef signed short int32_t;$/;"	t
+int64_t	bittypes.h	/^typedef _int64 int64_t;$/;"	t
+int64_t	bittypes.h	/^typedef long long int64_t;$/;"	t
+int8_t	bittypes.h	/^typedef signed char int8_t;$/;"	t
+int8_t	bittypes.h	/^typedef signed int int8_t;$/;"	t
+libdir	Makefile	/^libdir          = ${exec_prefix}\/lib$/;"	m
+mandir	Makefile	/^mandir          = ${datarootdir}\/man$/;"	m
+npf_if_addr	packet32.h	/^typedef struct npf_if_addr {$/;"	s
+npf_if_addr	packet32.h	/^}npf_if_addr;$/;"	t	typeref:struct:npf_if_addr
+pDagCard	packet32.h	/^        dagc_t *pDagCard;$/;"	m	struct:_ADAPTER
+pNetworkAddresses	packet32.h	/^        PNPF_IF_ADDRESS_ITEM pNetworkAddresses;$/;"	m	struct:_ADAPTER_INFO
+pWanAdapter	packet32.h	/^        PWAN_ADAPTER pWanAdapter;$/;"	m	struct:_ADAPTER
+packet	packet_main.c	/^WINE_DEFAULT_DEBUG_CHANNEL(packet);$/;"	v
+prefix	Makefile	/^prefix          = \/usr\/local$/;"	m
+prog_manext	Makefile	/^prog_manext     = 1$/;"	m
+srcdir	Makefile	/^srcdir          = .$/;"	m
+top_builddir	Makefile	/^top_builddir    = ..\/..$/;"	m
+top_srcdir	Makefile	/^top_srcdir      = ..\/..$/;"	m
+u_int16_t	bittypes.h	/^typedef unsigned char u_int16_t;$/;"	t
+u_int16_t	bittypes.h	/^typedef unsigned int u_int16_t;$/;"	t
+u_int16_t	bittypes.h	/^typedef unsigned short u_int16_t;$/;"	t
+u_int32_t	bittypes.h	/^typedef unsigned int u_int32_t;$/;"	t
+u_int32_t	bittypes.h	/^typedef unsigned long u_int32_t;$/;"	t
+u_int32_t	bittypes.h	/^typedef unsigned short u_int32_t;$/;"	t
+u_int64_t	bittypes.h	/^typedef unsigned _int64 u_int64_t;$/;"	t
+u_int64_t	bittypes.h	/^typedef unsigned int u_int64_t;$/;"	t
+u_int64_t	bittypes.h	/^typedef unsigned long long u_int64_t;$/;"	t
+u_int64_t	bittypes.h	/^typedef unsigned long u_int64_t;$/;"	t
+u_int64_t	bittypes.h	/^typedef unsigned short u_int64_t;$/;"	t
+u_int8_t	bittypes.h	/^typedef unsigned char u_int8_t;$/;"	t
+u_int8_t	bittypes.h	/^typedef unsigned int u_int8_t;$/;"	t
+ulBytesReceived	packet32.h	/^        DWORD        ulBytesReceived;$/;"	m	struct:_PACKET

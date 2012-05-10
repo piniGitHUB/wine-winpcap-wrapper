@@ -1,0 +1,9 @@
+MODULE    = wpcap.dll
+IMPORTLIB = wpcap
+DELAYIMPORTS = ws2_32
+EXTRALIBS = @LIBPCAP@
+
+C_SRCS = \
+	main.c
+
+@MAKE_DLL_RULES@

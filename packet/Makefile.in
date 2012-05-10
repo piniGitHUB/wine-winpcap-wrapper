@@ -1,0 +1,9 @@
+# Generated from packet.dll by winedump.
+MODULE    = packet.dll
+
+
+C_SRCS = \
+	packet_main.c
+
+@MAKE_DLL_RULES@
+

@@ -1,0 +1,36 @@
+; File generated automatically from ./wpcap.spec; do not edit!
+
+LIBRARY wpcap.dll
+
+EXPORTS
+  pcap_breakloop=wine_pcap_breakloop @9
+  pcap_close=wine_pcap_close @10
+  pcap_compile=wine_pcap_compile @11
+  pcap_datalink=wine_pcap_datalink @14
+  pcap_datalink_name_to_val=wine_pcap_datalink_name_to_val @15
+  pcap_datalink_val_to_description=wine_pcap_datalink_val_to_description @16
+  pcap_datalink_val_to_name=wine_pcap_datalink_val_to_name @17
+  pcap_dispatch=wine_pcap_dispatch @18
+  pcap_findalldevs=wine_pcap_findalldevs @27
+  pcap_freealldevs=wine_pcap_freealldevs @29
+  pcap_freecode=wine_pcap_freecode @30
+  pcap_geterr=wine_pcap_geterr @32
+  pcap_getnonblock=wine_pcap_getnonblock @34
+  pcap_lib_version=wine_pcap_lib_version @36
+  pcap_list_datalinks=wine_pcap_list_datalinks @37
+  pcap_lookupdev=wine_pcap_lookupdev @40
+  pcap_lookupnet=wine_pcap_lookupnet @41
+  pcap_loop=wine_pcap_loop @42
+  pcap_major_version=wine_pcap_major_version @43
+  pcap_minor_version=wine_pcap_minor_version @44
+  pcap_next=wine_pcap_next @45
+  pcap_next_ex=wine_pcap_next_ex @47
+  pcap_open_live=wine_pcap_open_live @52
+  pcap_sendpacket=wine_pcap_sendpacket @61
+  pcap_set_datalink=wine_pcap_set_datalink @66
+  pcap_setbuff=wine_pcap_setbuff @67
+  pcap_setfilter=wine_pcap_setfilter @68
+  pcap_setnonblock=wine_pcap_setnonblock @71
+  pcap_snapshot=wine_pcap_snapshot @74
+  pcap_stats=wine_pcap_stats @75
+  wsockinit=wine_wsockinit @78
