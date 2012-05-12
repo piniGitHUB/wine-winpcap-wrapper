@@ -16,6 +16,7 @@
 
 #include "packet32.h"
 #include "stdio.h"
+#include "wine/unicode.h"
 
 WINE_DEFAULT_DEBUG_CHANNEL(packet);
 
@@ -61,7 +62,7 @@ static void StringCchCopyA(char *pszDest,size_t cbDest, const char* pszSrc)
 
 }
 
-static void StringCchPrintfA(char *pszDest,size_t cbDest, char *pszFormat, ...)
+static void StringCchPrintfA(char *pszDest,size_t cbDest, const char *pszFormat, ...)
 {
         va_list marker;
         va_start( marker, pszFormat );     /* Initialize variable arguments. */
@@ -79,7 +80,7 @@ static void StringCchPrintfA(char *pszDest,size_t cbDest, char *pszFormat, ...)
 BOOLEAN PacketRequest(LPADAPTER  AdapterObject,BOOLEAN Set,PPACKET_OID_DATA
 OidData)
 {
-	DWORD		BytesReturned;
+	//DWORD		BytesReturned;
 	BOOLEAN		Result;
 
 	FIXME("PacketRequest\n");
@@ -90,7 +91,7 @@ OidData)
 		return FALSE;
 	}
 
-	Result=(BOOLEAN)DeviceIoControl(AdapterObject->hFile,(DWORD) Set ?  (DWORD)BIOCSETOID : (DWORD)BIOCQUERYOID, OidData,sizeof(PACKET_OID_DATA)-1+OidData->Length,OidData, sizeof(PACKET_OID_DATA)-1+OidData->Length,&BytesReturned,NULL);
+	//Result=(BOOLEAN)DeviceIoControl(AdapterObject->hFile,(DWORD) Set ?  (DWORD)BIOCSETOID : (DWORD)BIOCQUERYOID, OidData,sizeof(PACKET_OID_DATA)-1+OidData->Length,OidData, sizeof(PACKET_OID_DATA)-1+OidData->Length,&BytesReturned,NULL);
     
         Result=TRUE; /*FIXME: force return true */
 	// output some debug info
@@ -123,7 +124,8 @@ BOOLEAN PacketSetMaxLookaheadsize (LPADAPTER AdapterObject)
 		Status=PacketRequest(AdapterObject,FALSE,OidData);
 		OidData->Oid=OID_GEN_CURRENT_LOOKAHEAD;
 		Status=PacketRequest(AdapterObject,TRUE,OidData);
-		GlobalFreePtr(OidData);
+                TRACE("PacketRequest, OID=%.08x Length=%.05d \n", OidData->Oid, OidData->Length);
+		TRACE("OidData should be zero? %d \n", GlobalFreePtr(OidData));
 	}
 
 	return Status;
@@ -228,7 +230,7 @@ AdapterNameA + strlen(DEVICE_PREFIX));
 
 	//try if it is possible to open the adapter immediately
 	CreateDirectoryA("\\\\.\\Global",NULL);
-	lpAdapter->hFile=CreateFileA("C:\\windows\\debug.txt" , GENERIC_WRITE | GENERIC_READ, 0,NULL,CREATE_NEW,0,0);
+	lpAdapter->hFile=CreateFileA("C:\\windows\\debug.txt" , GENERIC_WRITE | GENERIC_READ, 0,NULL,CREATE_ALWAYS,0,0);
         CloseHandle(lpAdapter->hFile);
 	//lpAdapter->hFile=CreateFileA(SymbolicLinkA,GENERIC_WRITE | GENERIC_READ, 0,NULL,OPEN_EXISTING,0,0);
 	lpAdapter->hFile=CreateFileA("C:\\windows\\debug.txt",GENERIC_WRITE | GENERIC_READ, 0,NULL, OPEN_EXISTING,0,0);
@@ -240,7 +242,7 @@ AdapterNameA + strlen(DEVICE_PREFIX));
 			error=GetLastError();
 			FIXME("PacketOpenAdapterNPF: Unable to open the read event\n");
 			CloseHandle(lpAdapter->hFile);
-			GlobalFreePtr(lpAdapter);
+			TRACE("%d\n", GlobalFreePtr(lpAdapter));
 			//set the error to the one on which we failed
 
 			FIXME("PacketOpenAdapterNPF: PacketSetReadEvt failed, LastError=%8.8x\n",error);
@@ -264,7 +266,7 @@ AdapterNameA + strlen(DEVICE_PREFIX));
 	}
 
 	error=GetLastError();
-	GlobalFreePtr(lpAdapter);
+	TRACE("%d\n",GlobalFreePtr(lpAdapter));
 	//set the error to the one on which we failed
 	FIXME("PacketOpenAdapterNPF: CreateFile failed, LastError= %8.8x\n",error);
 	SetLastError(error);
@@ -278,8 +280,8 @@ static BOOLEAN PacketAddAdapterIPH(PIP_ADAPTER_INFO IphAd)
 	UINT i;
 	struct sockaddr_in *TmpAddr;
 	CHAR TName[256];
-	LPADAPTER adapter;
-	CHAR	npfCompleteDriverPrefix[MAX_WINPCAP_KEY_CHARS] = NPF_DRIVER_COMPLETE_DEVICE_PREFIX;
+	//LPADAPTER adapter;
+	//CHAR	npfCompleteDriverPrefix[MAX_WINPCAP_KEY_CHARS] = NPF_DRIVER_COMPLETE_DEVICE_PREFIX;
 
 	FIXME("PacketAddAdapterIPH\n");
 
@@ -304,12 +306,13 @@ static BOOLEAN PacketAddAdapterIPH(PIP_ADAPTER_INFO IphAd)
 //		IphAd->AdapterName);
 
 	// Create the NPF device name from the original device name
-	StringCchPrintfA(TName, sizeof(TName) - strlen(npfCompleteDriverPrefix), "%s%s", npfCompleteDriverPrefix, IphAd->AdapterName);
+	//StringCchPrintfA(TName, sizeof(TName) - strlen(npfCompleteDriverPrefix), "%s%s", npfCompleteDriverPrefix, IphAd->AdapterName);
+        lstrcpyA(TName, IphAd->AdapterName);
 
 	// Scan the adapters list to see if this one is already present
 	for(SAdInfo = g_AdaptersInfoList; SAdInfo != NULL; SAdInfo = SAdInfo->Next)
 	{
-		if(strcmp(TName, SAdInfo->Name) == 0)
+		if(lstrcmpA(TName, SAdInfo->Name) == 0)
 		{
 			FIXME("PacketAddAdapterIPH: Adapter %s already present in the list\n", TName);
 			goto SkipAd;
@@ -324,7 +327,8 @@ static BOOLEAN PacketAddAdapterIPH(PIP_ADAPTER_INFO IphAd)
 	else
 	{
 		FIXME("Trying to open adapter %s to see if it's available...\n", TName);
-		/*adapter = PacketOpenAdapterNPF(TName); */ //FIXME: why?
+		//PacketOpenAdapterNPF(TName);  //FIXME: why?
+                FIXME("Tried. For debug. \n");
 		if(/*adapter == NULL*/ FALSE)
 		{
 			// We are not able to open this adapter. Skip to the
@@ -357,9 +361,11 @@ sizeof(ADAPTER_INFO));
 
 	// Copy the device name
 	StringCchCopyA(TmpAdInfo->Name,ADAPTER_NAME_LENGTH, TName);
+        FIXME("TmpAdInfo->Name is %s\n", TmpAdInfo->Name);
 	
 	// Copy the description
 	StringCchCopyA(TmpAdInfo->Description, ADAPTER_DESC_LENGTH, IphAd->Description);
+        FIXME("TmpAdInfo->Description is %s\n", TmpAdInfo->Description);
 	
 	// Copy the MAC address
 	TmpAdInfo->MacAddressLen = IphAd->AddressLength;
@@ -421,7 +427,7 @@ sizeof(ADAPTER_INFO));
 		}
 	}
 
-	FIXME("Adding the IPv6 addresses to the adapter %s...\n", TName);
+	//FIXME("Adding the IPv6 addresses to the adapter %s...\n", TName);
 
 	// Now Add IPv6 Addresses
 
@@ -441,11 +447,16 @@ sizeof(ADAPTER_INFO));
 	g_AdaptersInfoList = TmpAdInfo;
 
 SkipAd:
+        FIXME("recheck: TmpAdInfo->Name is %s\n", TmpAdInfo->Name);
+        FIXME("recheck: g_AdaptersInfoList->Name is %s\n", wine_dbgstr_a(g_AdaptersInfoList->Name));
+        FIXME("recheck (w): g_AdaptersInfoList->Name is %s\n", wine_dbgstr_w(g_AdaptersInfoList->Name));
+        FIXME("recheck: g_AdaptersInfoList->Description is %s\n", wine_dbgstr_a(g_AdaptersInfoList->Description));
+        FIXME("recheck (w): g_AdaptersInfoList->Description is %s\n", wine_dbgstr_w(g_AdaptersInfoList->Description));
 	return TRUE;
 }
 
 
-static BOOLEAN PacketGetAdaptersIPH()
+static BOOLEAN PacketGetAdaptersIPH(void)
 {
 	PIP_ADAPTER_INFO AdList = NULL;
 	PIP_ADAPTER_INFO TmpAd;
@@ -460,14 +471,14 @@ static BOOLEAN PacketGetAdaptersIPH()
 		return FALSE;
 	}
 
-	FIXME("PacketGetAdaptersIPH: retrieved needed bytes for IPH");
+	FIXME("PacketGetAdaptersIPH: retrieved needed bytes for IPH\n");
 
 	// Allocate the buffer
 	AdList = GlobalAllocPtr(GMEM_MOVEABLE, OutBufLen);
 
 	if (AdList == NULL) 
 	{
-		FIXME("PacketGetAdaptersIPH: GlobalAlloc Failed allocating the buffer for GetAdaptersInfo");
+		FIXME("PacketGetAdaptersIPH: GlobalAlloc Failed allocating the buffer for GetAdaptersInfo\n");
 		return FALSE;
 	}
 
@@ -484,7 +495,7 @@ static BOOLEAN PacketGetAdaptersIPH()
 		PacketAddAdapterIPH(TmpAd);
 	}
 
-	GlobalFreePtr(AdList);
+	TRACE("%d\n",GlobalFreePtr(AdList));
 
 	return TRUE;
 }
@@ -504,7 +515,7 @@ LPPACKET PacketAllocatePacket(void)
 }
 
 
-VOID PacketLoadLibrariesDynamically()
+VOID PacketLoadLibrariesDynamically(void)
 {
         HMODULE IPHMod;
 
@@ -528,12 +539,12 @@ VOID PacketLoadLibrariesDynamically()
 }
 
 
-VOID PacketPopulateAdaptersInfoList()
+VOID PacketPopulateAdaptersInfoList(void)
 {
 	PADAPTER_INFO TAdInfo;
 	PVOID Mem2;
 
-	FIXME("PacketPopulateAdaptersInfoList");
+	FIXME("PacketPopulateAdaptersInfoList\n");
 
 	WaitForSingleObject(g_AdaptersInfoMutex, INFINITE);
 
@@ -552,10 +563,10 @@ VOID PacketPopulateAdaptersInfoList()
 			while(pCursor != NULL)
 			{
 				pItem = pCursor->Next;
-				GlobalFreePtr(pCursor);
+				TRACE("%d\n",GlobalFreePtr(pCursor));
 				pCursor = pItem;
 			}
-			GlobalFreePtr(Mem2);
+			TRACE("%d\n",GlobalFreePtr(Mem2));
 		}
 		
 		g_AdaptersInfoList = NULL;
@@ -596,9 +607,9 @@ BOOLEAN PacketGetAdapterNames(PTSTR pStr,PULONG  BufferSize)
 	ULONG	SizeNames = 0;
 	ULONG	SizeDesc;
 	ULONG	OffDescriptions;
-	FIXME("PacketGetAdapterNames");
-	FIXME("Packet DLL version %s, Driver version %s", PacketLibraryVersion, PacketDriverVersion);
-	FIXME("PacketGetAdapterNames: BufferSize=%u", *BufferSize);
+	FIXME("PacketGetAdapterNames\n");
+	FIXME("Packet DLL version %s, Driver version %s\n", PacketLibraryVersion, PacketDriverVersion);
+	FIXME("PacketGetAdapterNames: BufferSize=%u\n", *BufferSize);
 	// Check the presence on some libraries we rely on, and load them if we
 	// found them
 	//f
@@ -606,14 +617,14 @@ BOOLEAN PacketGetAdapterNames(PTSTR pStr,PULONG  BufferSize)
 	//d
 	// Create the adapter information list
 	//
-	FIXME("Populating the adapter list...");
+	FIXME("Populating the adapter list...\n");
 	PacketPopulateAdaptersInfoList();
 	WaitForSingleObject(g_AdaptersInfoMutex, INFINITE);
 	if(!g_AdaptersInfoList) 
 	{
 		ReleaseMutex(g_AdaptersInfoMutex);
 		*BufferSize = 0;
-		ERR("No adapters found in the system. Failing.");
+		ERR("No adapters found in the system. Failing.\n");
 		SetLastError(ERROR_INSUFFICIENT_BUFFER);
 		return FALSE;		// No adapters to return
 	}
@@ -634,7 +645,7 @@ BOOLEAN PacketGetAdapterNames(PTSTR pStr,PULONG  BufferSize)
 	if(SizeNeeded + 2 > *BufferSize || pStr == NULL)
 	{
 		ReleaseMutex(g_AdaptersInfoMutex);
- 		FIXME("PacketGetAdapterNames: input buffer too small, we need %u bytes", *BufferSize);
+ 		FIXME("PacketGetAdapterNames: input buffer too small, we need %u bytes\n", *BufferSize);
 		*BufferSize = SizeNeeded + 2;  // Report the required size
 		SetLastError(ERROR_INSUFFICIENT_BUFFER);
 		return FALSE;
@@ -669,13 +680,13 @@ BOOLEAN PacketGetAdapterNames(PTSTR pStr,PULONG  BufferSize)
 
 LPADAPTER PacketOpenAdapter(PCHAR AdapterNameWA)
 {
-        struct ADAPTER * lpAdapter = NULL;
+        LPADAPTER lpAdapter = NULL;
 	PCHAR AdapterNameA = NULL;
 	BOOL bFreeAdapterNameA;
 	
 	DWORD dwLastError = ERROR_SUCCESS;
  
- 	FIXME("PacketOpenAdapter\n");	
+ 	FIXME("PacketOpenAdapter: %s\n", AdapterNameWA);	
 	
 	FIXME("Packet DLL version %s, Driver version %s\n", PacketLibraryVersion, PacketDriverVersion); 
 
@@ -693,8 +704,9 @@ LPADAPTER PacketOpenAdapter(PCHAR AdapterNameWA)
 		//
 		// Unicode
 		//
-		size_t bufferSize = wcslen((PWCHAR)AdapterNameWA) + 1;
+		size_t bufferSize = strlenW((PWCHAR)AdapterNameWA) + 1;
 		
+                ERR("check if AdapterName is really Unicode!!\n\n");
 		AdapterNameA = GlobalAllocPtr(GPTR, bufferSize);
 		if (AdapterNameA == NULL)
 		{
@@ -744,17 +756,17 @@ VOID PacketCloseAdapter (LPADAPTER lpAdapter)
 
         // close the read event
         CloseHandle (lpAdapter->ReadEvent);
-        GlobalFreePtr (lpAdapter);
+        TRACE("%d\n",GlobalFreePtr (lpAdapter));
         lpAdapter = NULL;
 }
 
-PCHAR PacketGetDriverVersion()
+PCHAR PacketGetDriverVersion(void)
 {
         FIXME("PacketGetDriverVersion: %s\n", PacketDriverVersion);
         return PacketDriverVersion;
 }
 
-PCHAR PacketGetVersion()
+PCHAR PacketGetVersion(void)
 {
         FIXME("PacketGetVersion: %s\n", PacketLibraryVersion);
         return PacketLibraryVersion;
