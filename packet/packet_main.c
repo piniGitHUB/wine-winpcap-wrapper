@@ -449,9 +449,7 @@ sizeof(ADAPTER_INFO));
 SkipAd:
         FIXME("recheck: TmpAdInfo->Name is %s\n", TmpAdInfo->Name);
         FIXME("recheck: g_AdaptersInfoList->Name is %s\n", wine_dbgstr_a(g_AdaptersInfoList->Name));
-        FIXME("recheck (w): g_AdaptersInfoList->Name is %s\n", wine_dbgstr_w(g_AdaptersInfoList->Name));
         FIXME("recheck: g_AdaptersInfoList->Description is %s\n", wine_dbgstr_a(g_AdaptersInfoList->Description));
-        FIXME("recheck (w): g_AdaptersInfoList->Description is %s\n", wine_dbgstr_w(g_AdaptersInfoList->Description));
 	return TRUE;
 }
 
