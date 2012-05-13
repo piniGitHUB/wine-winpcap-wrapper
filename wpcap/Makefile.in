@@ -6,4 +6,6 @@ EXTRALIBS = @LIBPCAP@
 C_SRCS = \
 	main.c
 
+RC_SRCS = \
+	version.rc
 @MAKE_DLL_RULES@

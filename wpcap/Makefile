@@ -99,6 +99,9 @@ EXTRALIBS = -lpcap
 C_SRCS = \
 	main.c
 
+RC_SRCS = \
+        version.rc
+
 # Global rules for building dlls     -*-Makefile-*-
 #
 # Each individual makefile should define the following variables:
@@ -125,6 +128,7 @@ INSTALLDIRS = $(DESTDIR)$(dlldir) $(DESTDIR)$(fakedlldir) $(DESTDIR)$(datadir)/w
 # Each individual makefile may define the following variables:
 # C_SRCS       : C sources for the module
 # RC_SRCS      : resource source files
+
 # EXTRA_SRCS   : extra source files for make depend
 # EXTRA_OBJS   : extra object files
 # IMPORTS      : dlls to import
