@@ -1,0 +1,37 @@
+/*
+ * USER resources
+ *
+ * Copyright 2001 Alexandre Julliard
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ */
+
+
+
+/****************************************************************/
+/* Version */
+
+#include "version.h"
+
+#define WINE_FILEDESCRIPTION_STR "Winpcap dll"
+#define WINE_FILENAME_STR "wpcap.dll"
+
+/* these values come from Windows XP SP2 */
+#define WINE_FILEVERSION WINPCAP_MAJOR,WINPCAP_MINOR,WINPCAP_REV,WINPCAP_BUILD
+#define WINE_FILEVERSION_STR WINPCAP_VER_STRING
+#define WINE_PRODUCTVERSION WINPCAP_MAJOR,WINPCAP_MINOR,WINPCAP_REV,WINPCAP_BUILD
+#define WINE_PRODUCTVERSION_STR WINPCAP_VER_STRING
+
+#include "wine/wine_common_ver.rc"
