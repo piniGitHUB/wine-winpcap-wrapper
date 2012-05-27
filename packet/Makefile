@@ -98,6 +98,9 @@ MODULE    = packet.dll
 C_SRCS = \
 	packet_main.c
 
+RC_SRCS = \
+	version.rc
+
 # Global rules for building dlls     -*-Makefile-*-
 #
 # Each individual makefile should define the following variables:

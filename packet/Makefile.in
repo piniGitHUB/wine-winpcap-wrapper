@@ -5,5 +5,8 @@ MODULE    = packet.dll
 C_SRCS = \
 	packet_main.c
 
+RC_SRCS = \
+        version.rc
+
 @MAKE_DLL_RULES@
 
