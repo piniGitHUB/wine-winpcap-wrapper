@@ -235,7 +235,7 @@ AdapterNameA + strlen(DEVICE_PREFIX));
 	//lpAdapter->hFile=CreateFileA(SymbolicLinkA,GENERIC_WRITE | GENERIC_READ, 0,NULL,OPEN_EXISTING,0,0);
 	lpAdapter->hFile=CreateFileA("C:\\windows\\debug.txt",GENERIC_WRITE | GENERIC_READ, 0,NULL, OPEN_EXISTING,0,0);
 
-	if (lpAdapter->hFile != INVALID_HANDLE_VALUE) 
+	if (/* lpAdapter->hFile != INVALID_HANDLE_VALUE*/ TRUE )
 	{
 
 		if(PacketSetReadEvt(lpAdapter)==FALSE/* FALSE*/){
