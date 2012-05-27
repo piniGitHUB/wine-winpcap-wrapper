@@ -101,6 +101,17 @@ Set, OidData);
                  FIXME("OID_GEN_MEDIA_CONNECT_STATUS, Always reports connected!\n");
                  break;
 
+            case OID_802_3_PERMANENT_ADDRESS:
+            case OID_802_3_CURRENT_ADDRESS:
+                 OidData->Data[0]=0x00;
+                 OidData->Data[1]=0x11;
+                 OidData->Data[2]=0x22;
+                 OidData->Data[3]=0x33;
+                 OidData->Data[4]=0x44;
+                 OidData->Data[5]=0x55;
+                 FIXME("MAC ADDRESS, Always fills with fake address!\n");
+                 break;
+
             default:
                  FIXME("Unimplemented Oid type: %.08x\n", OidData->Oid);
                  break;
