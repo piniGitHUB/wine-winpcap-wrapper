@@ -93,6 +93,18 @@ Set, OidData);
 	}
 
 	//Result=(BOOLEAN)DeviceIoControl(AdapterObject->hFile,(DWORD) Set ?  (DWORD)BIOCSETOID : (DWORD)BIOCQUERYOID, OidData,sizeof(PACKET_OID_DATA)-1+OidData->Length,OidData, sizeof(PACKET_OID_DATA)-1+OidData->Length,&BytesReturned,NULL);
+
+        switch (OidData->Oid)
+        {
+            case OID_GEN_MEDIA_CONNECT_STATUS:
+                 OidData->Data[0]=0;
+                 FIXME("OID_GEN_MEDIA_CONNECT_STATUS, Always reports connected!\n");
+                 break;
+
+            default:
+                 FIXME("Unimplemented Oid type: %.08x\n", OidData->Oid);
+                 break;
+        }
     
         Result=TRUE; /*FIXME: force return true */
 	// output some debug info
