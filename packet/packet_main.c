@@ -77,6 +77,46 @@ static void StringCchPrintfA(char *pszDest,size_t cbDest, const char *pszFormat,
         va_end(marker);
 }
 
+BOOLEAN GetMacAddressByName(PCHAR Name, PUCHAR Addr)
+{
+        PIP_ADAPTER_ADDRESSES pAddresses = NULL;
+        ULONG ulOutBufLength = 0;
+        DWORD Ret = 0;
+
+        if (pAddresses != NULL)
+        {
+                Ret = GetAdaptersAddresses(AF_INET, 0, NULL, NULL, &ulOutBufLength);
+
+                if (Ret == ERROR_BUFFER_OVERFLOW)
+                {
+                        pAddresses = (PIP_ADAPTER_ADDRESSES)HeapAlloc(GetProcessHeap(), 0, ulOutBufLength);
+                }
+
+                if ( GetAdaptersAddresses(AF_INET, 0, NULL, pAddresses, &ulOutBufLength) == ERROR_SUCCESS)
+                {
+                        PIP_ADAPTER_ADDRESSES pCurrentAddr = pAddresses;
+
+                        while (pCurrentAddr)
+                        {
+                                if (lstrcmpA(pCurrentAddr->AdapterName, Name) == 0)
+                                {
+                                        memcpy(Addr, pCurrentAddr->PhysicalAddress, 6);
+                                        return TRUE;
+                                }
+                                pCurrentAddr = pCurrentAddr->Next;
+                        }
+                 }
+        }
+
+        if (pAddresses)
+        {
+                HeapFree(GetProcessHeap(), 0, pAddresses);
+                pAddresses = NULL;
+        }
+
+        return FALSE;
+}
+
 BOOLEAN PacketRequest(LPADAPTER  AdapterObject,BOOLEAN Set,PPACKET_OID_DATA
 OidData)
 {
@@ -103,13 +143,18 @@ Set, OidData);
 
             case OID_802_3_PERMANENT_ADDRESS:
             case OID_802_3_CURRENT_ADDRESS:
-                 OidData->Data[0]=0x00;
-                 OidData->Data[1]=0x11;
-                 OidData->Data[2]=0x22;
-                 OidData->Data[3]=0x33;
-                 OidData->Data[4]=0x44;
-                 OidData->Data[5]=0x55;
-                 FIXME("MAC ADDRESS, Always fills with fake address!\n");
+                 if (!GetMacAddressByName(AdapterObject->Name, (PUCHAR)(OidData + sizeof(OidData->Oid)+sizeof(OidData->Length))))
+                 {
+                         OidData->Data[0]=0x00;
+                         OidData->Data[1]=0x11;
+                         OidData->Data[2]=0x22;
+                         OidData->Data[3]=0x33;
+                         OidData->Data[4]=0x44;
+                         OidData->Data[5]=0x55;
+
+                         FIXME("Get mac address failed, fills with fake address!\n");
+                 }
+                 FIXME("MAC is %.02x:%.02x:%.02x:%.02x:%.02x:%.02x\n", OidData->Data[0], OidData->Data[1], OidData->Data[2], OidData->Data[3], OidData->Data[4], OidData->Data[5]);
                  break;
 
             default:
