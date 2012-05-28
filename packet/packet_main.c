@@ -77,35 +77,48 @@ static void StringCchPrintfA(char *pszDest,size_t cbDest, const char *pszFormat,
         va_end(marker);
 }
 
-BOOLEAN GetMacAddressByName(PCHAR Name, PUCHAR Addr)
+BOOLEAN GetMacAddressByName(PCHAR Name, UCHAR Addr[6])
 {
         PIP_ADAPTER_ADDRESSES pAddresses = NULL;
         ULONG ulOutBufLength = 0;
         DWORD Ret = 0;
-
-        if (pAddresses != NULL)
+        PCHAR tmpName;
+        CHAR device_prefix[12]="\\Device\\NPF_";
+        if (strncmp(Name, device_prefix, 12) == 0)
         {
-                Ret = GetAdaptersAddresses(AF_INET, 0, NULL, NULL, &ulOutBufLength);
+                tmpName = Name + 12;
+                FIXME("Force remove prefix!\n");
+        }
+        else
+        {
+                tmpName = Name;
+        }
 
-                if (Ret == ERROR_BUFFER_OVERFLOW)
+        Ret = GetAdaptersAddresses(AF_INET, 0, NULL, NULL, &ulOutBufLength);
+
+        if (Ret == ERROR_BUFFER_OVERFLOW)
+        {
+                pAddresses = (PIP_ADAPTER_ADDRESSES)HeapAlloc(GetProcessHeap(), 0, ulOutBufLength);
+        }
+
+        if ( GetAdaptersAddresses(AF_INET, 0, NULL, pAddresses, &ulOutBufLength) == ERROR_SUCCESS)
+        {
+                PIP_ADAPTER_ADDRESSES pCurrentAddr = pAddresses;
+
+                while (pCurrentAddr)
                 {
-                        pAddresses = (PIP_ADAPTER_ADDRESSES)HeapAlloc(GetProcessHeap(), 0, ulOutBufLength);
-                }
-
-                if ( GetAdaptersAddresses(AF_INET, 0, NULL, pAddresses, &ulOutBufLength) == ERROR_SUCCESS)
-                {
-                        PIP_ADAPTER_ADDRESSES pCurrentAddr = pAddresses;
-
-                        while (pCurrentAddr)
+                        if (lstrcmpA(pCurrentAddr->AdapterName, tmpName) == 0)
                         {
-                                if (lstrcmpA(pCurrentAddr->AdapterName, Name) == 0)
-                                {
-                                        memcpy(Addr, pCurrentAddr->PhysicalAddress, 6);
-                                        return TRUE;
-                                }
-                                pCurrentAddr = pCurrentAddr->Next;
+                                Addr[0] = pCurrentAddr->PhysicalAddress[0];
+                                Addr[1] = pCurrentAddr->PhysicalAddress[1];
+                                Addr[2] = pCurrentAddr->PhysicalAddress[2];
+                                Addr[3] = pCurrentAddr->PhysicalAddress[3];
+                                Addr[4] = pCurrentAddr->PhysicalAddress[4];
+                                Addr[5] = pCurrentAddr->PhysicalAddress[5];
+                                return TRUE;
                         }
-                 }
+                        pCurrentAddr = pCurrentAddr->Next;
+                }
         }
 
         if (pAddresses)
@@ -143,7 +156,7 @@ Set, OidData);
 
             case OID_802_3_PERMANENT_ADDRESS:
             case OID_802_3_CURRENT_ADDRESS:
-                 if (!GetMacAddressByName(AdapterObject->Name, (PUCHAR)(OidData + sizeof(OidData->Oid)+sizeof(OidData->Length))))
+                 if (!GetMacAddressByName(AdapterObject->Name, OidData->Data))
                  {
                          OidData->Data[0]=0x00;
                          OidData->Data[1]=0x11;
