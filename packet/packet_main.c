@@ -876,3 +876,10 @@ Sync)
         return TRUE;
 }
 
+BOOLEAN PacketSendPacket(LPADAPTER AdapterObject,LPPACKET lpPacket,BOOLEAN
+Sync)
+{
+        FIXME("Stub %p,%p, %d\n", AdapterObject, lpPacket, Sync);
+        return TRUE;
+}
+

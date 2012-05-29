@@ -18,7 +18,7 @@
 16 stdcall PacketOpenAdapter(ptr)
 17 stdcall PacketReceivePacket(ptr ptr long)
 18 stdcall PacketRequest(ptr long ptr)
-19 stub PacketSendPacket
+19 stdcall PacketSendPacket(ptr ptr long)
 20 stub PacketSendPackets
 21 stub PacketSetBpf
 22 stdcall PacketSetBuff(ptr long)
