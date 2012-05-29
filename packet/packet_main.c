@@ -851,3 +851,10 @@ PCHAR PacketGetVersion(void)
         FIXME("PacketGetVersion: %s\n", PacketLibraryVersion);
         return PacketLibraryVersion;
 }
+
+BOOLEAN PacketSetHwFilter(LPADAPTER  AdapterObject,ULONG Filter)
+{
+        FIXME("stub %p, %u\n", AdapterObject, Filter);
+        return TRUE;
+}
+
