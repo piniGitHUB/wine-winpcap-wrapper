@@ -858,3 +858,14 @@ BOOLEAN PacketSetHwFilter(LPADAPTER  AdapterObject,ULONG Filter)
         return TRUE;
 }
 
+BOOLEAN PacketSetBuff(LPADAPTER AdapterObject,int dim)
+{
+        FIXME("Stub %p, %d\n", AdapterObject, dim);
+        return TRUE;
+}
+
+VOID PacketInitPacket(LPPACKET lpPacket,PVOID Buffer,UINT Length)
+{
+        FIXME("Stub %p, %p, %u\n", lpPacket, Buffer, Length);
+}
+

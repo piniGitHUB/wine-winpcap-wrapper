@@ -12,7 +12,7 @@
 10 stub PacketGetStats
 11 stub PacketGetStatsEx
 12 stdcall PacketGetVersion()
-13 stub PacketInitPacket
+13 stdcall PacketInitPacket(ptr ptr long)
 14 stub PacketIsDumpEnded
 15 stub PacketLibraryVersion
 16 stdcall PacketOpenAdapter(ptr)
@@ -21,7 +21,7 @@
 19 stub PacketSendPacket
 20 stub PacketSendPackets
 21 stub PacketSetBpf
-22 stub PacketSetBuff
+22 stdcall PacketSetBuff(ptr long)
 23 stub PacketSetDumpLimits
 24 stub PacketSetDumpName
 25 stdcall PacketSetHwFilter(ptr long)
