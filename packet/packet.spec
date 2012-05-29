@@ -29,6 +29,6 @@
 27 stub PacketSetMinToCopy
 28 stub PacketSetMode
 29 stub PacketSetNumWrites
-30 stub PacketSetReadTimeout
+30 stdcall PacketSetReadTimeout(ptr long)
 31 stub PacketSetSnapLen
 32 stub PacketStopDriver

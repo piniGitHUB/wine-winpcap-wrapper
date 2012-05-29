@@ -879,7 +879,12 @@ Sync)
 BOOLEAN PacketSendPacket(LPADAPTER AdapterObject,LPPACKET lpPacket,BOOLEAN
 Sync)
 {
-        FIXME("Stub %p,%p, %d\n", AdapterObject, lpPacket, Sync);
+        FIXME("Stub %p, %p, %d\n", AdapterObject, lpPacket, Sync);
         return TRUE;
 }
 
+BOOLEAN PacketSetReadTimeout(LPADAPTER AdapterObject,int timeout)
+{
+        FIXME("Stub %p, %d\n", AdapterObject, timeout);
+        return TRUE;
+}
