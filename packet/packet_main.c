@@ -869,3 +869,10 @@ VOID PacketInitPacket(LPPACKET lpPacket,PVOID Buffer,UINT Length)
         FIXME("Stub %p, %p, %u\n", lpPacket, Buffer, Length);
 }
 
+BOOLEAN PacketReceivePacket(LPADAPTER AdapterObject,LPPACKET lpPacket,BOOLEAN
+Sync)
+{
+        FIXME("Stub %p, %p, %d\n", AdapterObject, lpPacket, Sync);
+        return TRUE;
+}
+

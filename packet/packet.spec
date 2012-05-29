@@ -16,7 +16,7 @@
 14 stub PacketIsDumpEnded
 15 stub PacketLibraryVersion
 16 stdcall PacketOpenAdapter(ptr)
-17 stub PacketReceivePacket
+17 stdcall PacketReceivePacket(ptr ptr long)
 18 stdcall PacketRequest(ptr long ptr)
 19 stub PacketSendPacket
 20 stub PacketSendPackets
