@@ -888,3 +888,10 @@ BOOLEAN PacketSetReadTimeout(LPADAPTER AdapterObject,int timeout)
         FIXME("Stub %p, %d\n", AdapterObject, timeout);
         return TRUE;
 }
+
+BOOLEAN PacketSetNumWrites(LPADAPTER AdapterObject,int nwrites)
+{
+        FIXME("Stub %p, %d\n", AdapterObject, nwrites);
+        return TRUE;
+}
+
