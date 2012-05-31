@@ -11,6 +11,7 @@ EXPORTS
   pcap_datalink_val_to_description=wine_pcap_datalink_val_to_description @16
   pcap_datalink_val_to_name=wine_pcap_datalink_val_to_name @17
   pcap_dispatch=wine_pcap_dispatch @18
+  pcap_dump=wine_pcap_dump @19
   pcap_dump_open=wine_pcap_dump_open @24
   pcap_findalldevs=wine_pcap_findalldevs @27
   pcap_freealldevs=wine_pcap_freealldevs @29

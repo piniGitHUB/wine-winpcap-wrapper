@@ -234,3 +234,9 @@ pcap_dumper_t * CDECL wine_pcap_dump_open(pcap_t *p, const char *fname)
     TRACE("(%p %s)\n", p, fname);
     return pcap_dump_open(p, fname);
 }
+
+void CDECL wine_pcap_dump(u_char *user, struct pcap_pkthdr *h, u_char *sp)
+{
+    TRACE("(%s %p %s)\n", user, h, sp);
+    pcap_dump(user, h, sp);
+}
