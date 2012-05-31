@@ -895,3 +895,10 @@ BOOLEAN PacketSetNumWrites(LPADAPTER AdapterObject,int nwrites)
         return TRUE;
 }
 
+VOID PacketFreePacket(LPPACKET lpPacket)
+
+{
+    FIXME("lpPacket: %p\n", lpPacket);
+    (void)GlobalFreePtr(lpPacket);
+}
+
