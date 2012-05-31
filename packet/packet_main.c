@@ -207,7 +207,7 @@ BOOLEAN PacketSetMaxLookaheadsize (LPADAPTER AdapterObject)
 		OidData->Oid=OID_GEN_CURRENT_LOOKAHEAD;
 		Status=PacketRequest(AdapterObject,TRUE,OidData);
                 TRACE("PacketRequest, OID=%.08x Length=%.05d \n", OidData->Oid, OidData->Length);
-		TRACE("OidData should be zero? %d \n", GlobalFreePtr(OidData));
+		(void)GlobalFreePtr(OidData);
 	}
 
 	return Status;
@@ -324,7 +324,7 @@ AdapterNameA + strlen(DEVICE_PREFIX));
 			error=GetLastError();
 			FIXME("PacketOpenAdapterNPF: Unable to open the read event\n");
 			CloseHandle(lpAdapter->hFile);
-			TRACE("%d\n", GlobalFreePtr(lpAdapter));
+			(void)GlobalFreePtr(lpAdapter);
 			//set the error to the one on which we failed
 
 			FIXME("PacketOpenAdapterNPF: PacketSetReadEvt failed, LastError=%8.8x\n",error);
@@ -348,7 +348,7 @@ AdapterNameA + strlen(DEVICE_PREFIX));
 	}
 
 	error=GetLastError();
-	TRACE("%d\n",GlobalFreePtr(lpAdapter));
+	(void)GlobalFreePtr(lpAdapter);
 	//set the error to the one on which we failed
 	FIXME("PacketOpenAdapterNPF: CreateFile failed, LastError= %8.8x\n",error);
 	SetLastError(error);
@@ -575,7 +575,7 @@ static BOOLEAN PacketGetAdaptersIPH(void)
 		PacketAddAdapterIPH(TmpAd);
 	}
 
-	TRACE("%d\n",GlobalFreePtr(AdList));
+	(void)GlobalFreePtr(AdList);
 
 	return TRUE;
 }
@@ -643,10 +643,10 @@ VOID PacketPopulateAdaptersInfoList(void)
 			while(pCursor != NULL)
 			{
 				pItem = pCursor->Next;
-				TRACE("%d\n",GlobalFreePtr(pCursor));
+				(void)GlobalFreePtr(pCursor);
 				pCursor = pItem;
 			}
-			TRACE("%d\n",GlobalFreePtr(Mem2));
+			(void)GlobalFreePtr(Mem2);
 		}
 		
 		g_AdaptersInfoList = NULL;
@@ -836,7 +836,7 @@ VOID PacketCloseAdapter (LPADAPTER lpAdapter)
 
         // close the read event
         CloseHandle (lpAdapter->ReadEvent);
-        TRACE("%d\n",GlobalFreePtr (lpAdapter));
+        (void)GlobalFreePtr(lpAdapter);
         lpAdapter = NULL;
 }
 
