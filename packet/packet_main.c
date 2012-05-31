@@ -1,13 +1,3 @@
-/*
- * packet.dll
- *
- * Generated from packet.dll by winedump.
- *
- * DO NOT SUBMIT GENERATED DLLS FOR INCLUSION INTO WINE!
- *
- */
-
-
 #include <stdarg.h>
 
 #include "windef.h"
