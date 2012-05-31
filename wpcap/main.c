@@ -228,3 +228,9 @@ INT CDECL wine_wsockinit(VOID)
     if (WSAStartup(MAKEWORD(1,1), &wsadata)) return -1;
     return 0;
 }
+
+pcap_dumper_t * CDECL wine_pcap_dump_open(pcap_t *p, const char *fname)
+{
+    TRACE("(%p %s)\n", p, fname);
+    return pcap_dump_open(p, fname);
+}

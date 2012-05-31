@@ -21,7 +21,7 @@
 @ stub pcap_dump_file
 @ stub pcap_dump_flush
 @ stub pcap_dump_ftell
-@ stub pcap_dump_open
+@ cdecl pcap_dump_open(ptr ptr) wine_pcap_dump_open
 @ stub pcap_file
 @ stub pcap_fileno
 @ cdecl pcap_findalldevs(ptr str) wine_pcap_findalldevs
