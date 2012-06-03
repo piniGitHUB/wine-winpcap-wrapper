@@ -711,9 +711,7 @@ BOOLEAN PacketGetAdapterNames(PTSTR pStr,PULONG  BufferSize)
 	ULONG	SizeNames = 0;
 	ULONG	SizeDesc;
 	ULONG	OffDescriptions;
-	FIXME("PacketGetAdapterNames\n");
-	FIXME("Packet DLL version %s, Driver version %s\n", PacketLibraryVersion, PacketDriverVersion);
-	FIXME("PacketGetAdapterNames: BufferSize=%u\n", *BufferSize);
+	FIXME("PacketGetAdapterNames pStr: %p, BufferSize=%u\n", pStr, *BufferSize);
 	// Check the presence on some libraries we rely on, and load them if we
 	// found them
 	//f
@@ -853,7 +851,7 @@ LPADAPTER PacketOpenAdapter(PCHAR AdapterNameWA)
 
 VOID PacketCloseAdapter (LPADAPTER lpAdapter)
 {
-        FIXME("Packet32: PacketCloseAdapter\n");
+        FIXME("Packet32: PacketCloseAdapter lpAdapter: %p\n", lpAdapter);
 
         // close the capture handle
         CloseHandle (lpAdapter->hFile);
@@ -878,44 +876,44 @@ PCHAR PacketGetVersion(void)
 
 BOOLEAN PacketSetHwFilter(LPADAPTER  AdapterObject,ULONG Filter)
 {
-        FIXME("stub %p, %u\n", AdapterObject, Filter);
+        FIXME("stub AdapterObject: %p, Filter: %u\n", AdapterObject, Filter);
         return TRUE;
 }
 
 BOOLEAN PacketSetBuff(LPADAPTER AdapterObject,int dim)
 {
-        FIXME("Stub %p, %d\n", AdapterObject, dim);
+        FIXME("Stub AdapterObject: %p, dim: %d\n", AdapterObject, dim);
         return TRUE;
 }
 
 VOID PacketInitPacket(LPPACKET lpPacket,PVOID Buffer,UINT Length)
 {
-        FIXME("Stub %p, %p, %u\n", lpPacket, Buffer, Length);
+        FIXME("Stub lpPacket: %p, Buffer: %p, Length: %u\n", lpPacket, Buffer, Length);
 }
 
 BOOLEAN PacketReceivePacket(LPADAPTER AdapterObject,LPPACKET lpPacket,BOOLEAN
 Sync)
 {
-        FIXME("Stub %p, %p, %d\n", AdapterObject, lpPacket, Sync);
+        FIXME("Stub AdapterObject: %p, lpPacket: %p, Sync: %d\n", AdapterObject, lpPacket, Sync);
         return TRUE;
 }
 
 BOOLEAN PacketSendPacket(LPADAPTER AdapterObject,LPPACKET lpPacket,BOOLEAN
 Sync)
 {
-        FIXME("Stub %p, %p, %d\n", AdapterObject, lpPacket, Sync);
+        FIXME("Stub AdapterObject: %p, lpPacket: %p, Sync: %d\n", AdapterObject, lpPacket, Sync);
         return TRUE;
 }
 
 BOOLEAN PacketSetReadTimeout(LPADAPTER AdapterObject,int timeout)
 {
-        FIXME("Stub %p, %d\n", AdapterObject, timeout);
+        FIXME("Stub AdapterObject: %p, timeout: %d\n", AdapterObject, timeout);
         return TRUE;
 }
 
 BOOLEAN PacketSetNumWrites(LPADAPTER AdapterObject,int nwrites)
 {
-        FIXME("Stub %p, %d\n", AdapterObject, nwrites);
+        FIXME("Stub AdapterObject: %p, nwrites: %d\n", AdapterObject, nwrites);
         return TRUE;
 }
 
@@ -931,6 +929,7 @@ BOOLEAN PacketGetNetType(LPADAPTER AdapterObject, NetType *type)
         PADAPTER_INFO TAdInfo;
         BOOLEAN ret;
 
+        FIXME("AdapterObject: %p, type: %p\n", AdapterObject, type);
         WaitForSingleObject(g_AdaptersInfoMutex, INFINITE);
         // Find the PADAPTER_INFO structure associated with this adapter 
         TAdInfo = PacketFindAdInfo(AdapterObject->Name);
