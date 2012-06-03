@@ -670,6 +670,40 @@ VOID PacketPopulateAdaptersInfoList(void)
 	FIXME("PacketPopulateAdaptersInfoList end \n");
 }
 
+PADAPTER_INFO PacketFindAdInfo(PCHAR AdapterName)
+{
+        //this function should NOT acquire the g_AdaptersInfoMutex, since it
+        //does return an ADAPTER_INFO structure
+        PADAPTER_INFO TAdInfo;
+
+        if (g_AdaptersInfoList == NULL)
+        {
+                TRACE("Repopulating the adapters info list...");
+                PacketPopulateAdaptersInfoList();
+        }
+
+        TAdInfo = g_AdaptersInfoList;
+
+        while(TAdInfo != NULL)
+        {
+                if(strcmp(TAdInfo->Name, AdapterName) == 0)
+                {
+                        TRACE("Found AdInfo for adapter %s", AdapterName);
+                        break;
+                }
+
+                TAdInfo = TAdInfo->Next;
+        }
+
+        if (TAdInfo == NULL)
+        {
+                TRACE("NOT found AdInfo for adapter %s", AdapterName);
+        }
+
+        return TAdInfo;
+}
+
+
 BOOLEAN PacketGetAdapterNames(PTSTR pStr,PULONG  BufferSize)
 {
 	PADAPTER_INFO	TAdInfo;
