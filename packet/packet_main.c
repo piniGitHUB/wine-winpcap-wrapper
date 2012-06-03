@@ -926,3 +926,32 @@ VOID PacketFreePacket(LPPACKET lpPacket)
     (void)GlobalFreePtr(lpPacket);
 }
 
+BOOLEAN PacketGetNetType(LPADAPTER AdapterObject, NetType *type)
+{
+        PADAPTER_INFO TAdInfo;
+        BOOLEAN ret;
+
+        WaitForSingleObject(g_AdaptersInfoMutex, INFINITE);
+        // Find the PADAPTER_INFO structure associated with this adapter 
+        TAdInfo = PacketFindAdInfo(AdapterObject->Name);
+
+        if(TAdInfo != NULL)
+        {
+                TRACE("Adapter found");
+                // Copy the data
+                memcpy(type, &(TAdInfo->LinkLayer), sizeof(struct NetType));
+                ret = TRUE;
+        }
+        else
+        {
+                TRACE("PacketGetNetType: Adapter not found");
+                ret =  FALSE;
+        }
+
+        TRACE("%u, %llu\n", type->LinkType, type->LinkSpeed);
+
+        ReleaseMutex(g_AdaptersInfoMutex);
+
+        return ret;
+}
+

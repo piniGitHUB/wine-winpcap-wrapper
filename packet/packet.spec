@@ -7,7 +7,7 @@
 5 stub PacketGetAirPcapHandle
 6 stdcall PacketGetDriverVersion()
 7 stub PacketGetNetInfoEx
-8 stub PacketGetNetType
+8 stdcall PacketGetNetType(ptr ptr)
 9 stub PacketGetReadEvent
 10 stub PacketGetStats
 11 stub PacketGetStatsEx
