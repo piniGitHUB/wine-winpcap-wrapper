@@ -961,3 +961,81 @@ BOOLEAN PacketSetMinToCopy(LPADAPTER AdapterObject,int nbytes)
         // pcap_setmintocopy
         return TRUE;
 }
+
+static PCHAR WChar2SChar(PWCHAR string)
+{
+        PCHAR TmpStr;
+        TmpStr = (CHAR*) GlobalAllocPtr(GMEM_MOVEABLE | GMEM_ZEROINIT, (DWORD)(lstrlenW(string)+2));
+
+        // Conver to ASCII
+        WideCharToMultiByte( CP_ACP, 0, string, -1, TmpStr, (DWORD)(lstrlenW(string)+2), NULL, NULL);
+
+        return TmpStr;
+}
+
+
+BOOLEAN PacketGetNetInfoEx(PCHAR AdapterName, npf_if_addr* buffer, PLONG NEntries)
+{
+	PADAPTER_INFO TAdInfo;
+	PCHAR Tname;
+	BOOLEAN Res, FreeBuff;
+
+        FIXME("AdapterName: %s, buffer: %p, NEntries: %p \n", AdapterName, buffer, NEntries);
+
+	// Provide conversion for backward compatibility
+	if(AdapterName[1] != 0)
+	{ //ASCII
+		Tname = AdapterName;
+		FreeBuff = FALSE;
+	}
+	else
+	{
+		Tname = WChar2SChar((PWCHAR)AdapterName);
+		FreeBuff = TRUE;
+	}
+	FIXME("Should Update the information about this adapter.\n");
+
+	WaitForSingleObject(g_AdaptersInfoMutex, INFINITE);
+	// Find the PADAPTER_INFO structure associated with this adapter 
+	TAdInfo = PacketFindAdInfo(Tname);
+	if(TAdInfo != NULL)
+	{
+		LONG numEntries = 0, i;
+		PNPF_IF_ADDRESS_ITEM pCursor;
+
+		pCursor = TAdInfo->pNetworkAddresses;
+
+		while(pCursor != NULL)
+		{
+			numEntries ++;
+			pCursor = pCursor->Next;
+		}
+		if (numEntries < *NEntries)
+		{
+			*NEntries = numEntries;
+		}
+
+		pCursor = TAdInfo->pNetworkAddresses;
+		for (i = 0; (i < *NEntries) && (pCursor != NULL); i++)
+		{
+			buffer[i] = pCursor->Addr;
+			pCursor = pCursor->Next;
+		}
+
+		Res = TRUE;
+	}
+	else
+	{
+		Res = FALSE;
+	}
+	ReleaseMutex(g_AdaptersInfoMutex);
+	if(FreeBuff) (void)GlobalFreePtr(Tname);
+	return Res;
+}
+
+BOOLEAN PacketSetBpf(LPADAPTER AdapterObject, struct bpf_program *fp)
+{
+        FIXME(" AdapterObject: %p, fp: %p \n", AdapterObject, fp);
+        // pcap_setfilter(pcap_t *p, struct bpf_program *fp);
+        return TRUE;
+}

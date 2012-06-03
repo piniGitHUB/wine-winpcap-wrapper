@@ -119,3 +119,18 @@ typedef struct _PACKET_OID_DATA PACKET_OID_DATA, *PPACKET_OID_DATA;
 #define  BIOCSETOID 2147483648
 #define  BIOCQUERYOID 2147483652
 
+struct bpf_program
+{
+        UINT bf_len;
+        struct bpf_insn *bf_insns;
+};
+
+struct bpf_insn
+{
+        USHORT  code;
+        UCHAR   jt;
+        UCHAR   jf;
+        int k;
+};
+
+

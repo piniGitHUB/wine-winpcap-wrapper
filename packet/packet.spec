@@ -6,7 +6,7 @@
 4 stdcall PacketGetAdapterNames(ptr ptr)
 5 stub PacketGetAirPcapHandle
 6 stdcall PacketGetDriverVersion()
-7 stub PacketGetNetInfoEx
+7 stdcall PacketGetNetInfoEx(ptr ptr ptr)
 8 stdcall PacketGetNetType(ptr ptr)
 9 stub PacketGetReadEvent
 10 stub PacketGetStats
@@ -20,7 +20,7 @@
 18 stdcall PacketRequest(ptr long ptr)
 19 stdcall PacketSendPacket(ptr ptr long)
 20 stub PacketSendPackets
-21 stub PacketSetBpf
+21 stdcall PacketSetBpf(ptr ptr)
 22 stdcall PacketSetBuff(ptr long)
 23 stub PacketSetDumpLimits
 24 stub PacketSetDumpName
