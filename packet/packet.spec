@@ -2,7 +2,7 @@
 
 1 stdcall PacketAllocatePacket()
 2 stdcall PacketCloseAdapter(ptr)
-3 stub PacketFreePacket
+3 stdcall PacketFreePacket(ptr)
 4 stdcall PacketGetAdapterNames(ptr ptr)
 5 stub PacketGetAirPcapHandle
 6 stdcall PacketGetDriverVersion()
