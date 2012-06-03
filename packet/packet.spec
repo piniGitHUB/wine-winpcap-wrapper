@@ -26,7 +26,7 @@
 24 stub PacketSetDumpName
 25 stdcall PacketSetHwFilter(ptr long)
 26 stub PacketSetLoopbackBehavior
-27 stub PacketSetMinToCopy
+27 stdcall PacketSetMinToCopy(ptr long)
 28 stub PacketSetMode
 29 stdcall PacketSetNumWrites(ptr long)
 30 stdcall PacketSetReadTimeout(ptr long)

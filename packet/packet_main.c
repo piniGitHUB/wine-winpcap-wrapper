@@ -955,3 +955,9 @@ BOOLEAN PacketGetNetType(LPADAPTER AdapterObject, NetType *type)
         return ret;
 }
 
+BOOLEAN PacketSetMinToCopy(LPADAPTER AdapterObject,int nbytes)
+{
+        FIXME("AdapterObject: %p, nbytes: %d\n", AdapterObject, nbytes);
+        // pcap_setmintocopy
+        return TRUE;
+}
