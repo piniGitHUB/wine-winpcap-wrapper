@@ -14,8 +14,6 @@ WINE_DEFAULT_DEBUG_CHANNEL(packet);
 char PacketLibraryVersion[64] = "4.1.0.2001";
 char PacketDriverVersion[64] = "4.1.0.2001";
 
-volatile LONG g_DynamicLibrariesLoaded = 0;
-HANDLE g_DynamicLibrariesMutex;
 typedef VOID (*GAAHandler)( ULONG, DWORD, PVOID, PIP_ADAPTER_ADDRESSES , PULONG);
 GAAHandler g_GetAdaptersAddressesPointer = NULL;
 
@@ -585,30 +583,6 @@ LPPACKET PacketAllocatePacket(void)
 }
 
 
-VOID PacketLoadLibrariesDynamically(void)
-{
-        HMODULE IPHMod;
-
-        g_DynamicLibrariesLoaded++;
-
-        if(g_DynamicLibrariesLoaded != 1)
-        {
-                ReleaseMutex(g_DynamicLibrariesMutex);
-                FIXME("PacketLoadLibrariesDynamically already done!\n");
-                return;
-        }
-
-        IPHMod = GetModuleHandleA("Iphlpapi");
-        if (IPHMod != NULL)
-        {
-                g_GetAdaptersAddressesPointer = (GAAHandler) GetProcAddress(IPHMod ,"GetAdaptersAddresses");
-        }
-
-        ReleaseMutex(g_DynamicLibrariesMutex);
-        return;
-}
-
-
 VOID PacketPopulateAdaptersInfoList(void)
 {
 	PADAPTER_INFO TAdInfo;
@@ -712,11 +686,6 @@ BOOLEAN PacketGetAdapterNames(PTSTR pStr,PULONG  BufferSize)
 	ULONG	SizeDesc;
 	ULONG	OffDescriptions;
 	FIXME("PacketGetAdapterNames pStr: %p, BufferSize=%u\n", pStr, *BufferSize);
-	// Check the presence on some libraries we rely on, and load them if we
-	// found them
-	//f
-	PacketLoadLibrariesDynamically();
-	//d
 	// Create the adapter information list
 	//
 	FIXME("Populating the adapter list...\n");
@@ -792,7 +761,6 @@ LPADAPTER PacketOpenAdapter(PCHAR AdapterNameWA)
 	
 	FIXME("Packet DLL version %s, Driver version %s\n", PacketLibraryVersion, PacketDriverVersion); 
 
-	PacketLoadLibrariesDynamically();
 	if(AdapterNameWA[1]!=0)
 	{ 
 		//
