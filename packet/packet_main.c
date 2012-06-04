@@ -758,7 +758,9 @@ LPADAPTER PacketOpenAdapter(PCHAR AdapterNameWA)
         LPADAPTER lpAdapter = NULL;
 	PCHAR AdapterNameA = NULL;
 	BOOL bFreeAdapterNameA;
-	
+        CHAR device_prefix[12]="\\Device\\NPF_";
+        int prefix_offset = 0;
+        	
 	DWORD dwLastError = ERROR_SUCCESS;
  
  	FIXME("PacketOpenAdapter: %s\n", AdapterNameWA);	
@@ -790,6 +792,14 @@ LPADAPTER PacketOpenAdapter(PCHAR AdapterNameWA)
 		StringCchPrintfA(AdapterNameA, bufferSize, "%ws", (PWCHAR)AdapterNameWA);
 		bFreeAdapterNameA = TRUE;
 	}
+
+        if (strncmp(AdapterNameA, device_prefix, 12) == 0)
+        {
+                prefix_offset = 12;
+                FIXME("Force remove prefix!\n");
+        }
+        
+
 	do
 	{
 		//
@@ -817,7 +827,7 @@ LPADAPTER PacketOpenAdapter(PCHAR AdapterNameWA)
 	}
 	else
 	{
-                lpAdapter->hFile = pcap_open_live(lpAdapter->Name, 65536, 1, 1000, errbuf);
+                lpAdapter->hFile = pcap_open_live(AdapterNameA + prefix_offset, 65536, 1, 1000, errbuf);
                 if (lpAdapter->hFile == NULL)
                 {
                         ERR("pcap_open_live error: %s \n", errbuf);
