@@ -921,6 +921,7 @@ BOOLEAN PacketSendPacket(LPADAPTER AdapterObject,LPPACKET lpPacket,BOOLEAN
 Sync)
 {
         FIXME("Stub AdapterObject: %p, lpPacket: %p, Sync: %d\n", AdapterObject, lpPacket, Sync);
+        FIXME("lpPacket->Buffer: %p, lpPacket->Length: %d \n", lpPacket->Buffer, lpPacket->Length);
         if (pcap_sendpacket(AdapterObject->hFile, lpPacket->Buffer, lpPacket->Length) == 0 )
                 return TRUE;
         else
