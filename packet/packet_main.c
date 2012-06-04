@@ -129,6 +129,8 @@ OidData)
 	FIXME("Stub: AdapterObject:%p, Set:%d, OidData: %p\n", AdapterObject,
 Set, OidData);
 
+        if ( AdapterObject == NULL ) return FALSE;
+
 	if(AdapterObject->Flags != INFO_FLAG_NDIS_ADAPTER)
 	{
 		FIXME("PacketRequest not supported on non-NPF/NPFIM adapters.\n");
