@@ -876,8 +876,8 @@ BOOLEAN PacketReceivePacket(LPADAPTER AdapterObject,LPPACKET lpPacket,BOOLEAN Sy
 {
         struct pcap_pkthdr *header;
         const u_char *pkt_data;
-        u_char *Packet_data = lpPacket->Buffer;
         u_char *Packet_header= lpPacket->Buffer;
+        u_char *Packet_data = lpPacket->Buffer;
         int res=0;
         int i;
 
@@ -894,7 +894,7 @@ BOOLEAN PacketReceivePacket(LPADAPTER AdapterObject,LPPACKET lpPacket,BOOLEAN Sy
         {
                 memcpy(Packet_header, header, sizeof(*header)); 
                 memcpy(Packet_data, pkt_data, header->len);
-                lpPacket->ulBytesReceived = header->len;
+                lpPacket->ulBytesReceived = header->len + 20;
         }
 
 
