@@ -816,6 +816,11 @@ LPADAPTER PacketOpenAdapter(PCHAR AdapterNameWA)
 	else
 	{
                 lpAdapter->hFile = pcap_open_live(lpAdapter->Name, 65536, 1, 1000, errbuf);
+                if (lpAdapter->hFile == NULL)
+                {
+                        ERR("pcap_open_live error: %s \n", errbuf);
+                        return NULL;
+                }
                 FIXME("Dirty hack! pcap_t is: %p\n", lpAdapter->hFile);
 		return lpAdapter;
 	}
@@ -890,7 +895,6 @@ BOOLEAN PacketReceivePacket(LPADAPTER AdapterObject,LPPACKET lpPacket,BOOLEAN Sy
                 memcpy(Packet_header, header, sizeof(*header)); 
                 memcpy(Packet_data, pkt_data, header->len);
                 lpPacket->ulBytesReceived = header->len;
-                FIXME("header is %d\n", sizeof(*header));
         }
 
 
