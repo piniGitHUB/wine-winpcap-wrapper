@@ -889,8 +889,8 @@ BOOLEAN PacketReceivePacket(LPADAPTER AdapterObject,LPPACKET lpPacket,BOOLEAN Sy
         FIXME("AdapterObject->pcap_t is %p\n", AdapterObject->hFile);
 
         res = pcap_next_ex( AdapterObject->hFile, &header, &pkt_data);
-        if ( res < 0) return FALSE;
-        if ( res >= 0)
+        if ( res <= 0) return FALSE;
+        if ( res > 0)
         {
                 memcpy(Packet_header, header, sizeof(*header)); 
                 memcpy(Packet_data, pkt_data, header->len);
