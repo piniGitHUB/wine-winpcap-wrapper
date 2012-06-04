@@ -857,12 +857,19 @@ BOOLEAN PacketSetBuff(LPADAPTER AdapterObject,int dim)
 VOID PacketInitPacket(LPPACKET lpPacket,PVOID Buffer,UINT Length)
 {
         FIXME("Stub lpPacket: %p, Buffer: %p, Length: %u\n", lpPacket, Buffer, Length);
+        lpPacket->Buffer = Buffer;
+        lpPacket->Length = Length;
+        lpPacket->ulBytesReceived = 0;
+        lpPacket->bIoComplete = FALSE;
 }
 
 BOOLEAN PacketReceivePacket(LPADAPTER AdapterObject,LPPACKET lpPacket,BOOLEAN
 Sync)
 {
         FIXME("Stub AdapterObject: %p, lpPacket: %p, Sync: %d\n", AdapterObject, lpPacket, Sync);
+        FIXME("lpPacket->Length is %u\n", lpPacket->Length);
+        FIXME("lpPacket->Buffer is %p\n", lpPacket->Buffer);
+        FIXME("lpPacket->ulBytesReceived is %u\n", lpPacket->ulBytesReceived);
         return TRUE;
 }
 
