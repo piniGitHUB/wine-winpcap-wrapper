@@ -7,12 +7,14 @@
 #include "packet32.h"
 #include "stdio.h"
 #include "wine/unicode.h"
+#include <pcap/pcap.h>
 
 WINE_DEFAULT_DEBUG_CHANNEL(packet);
 
 
 char PacketLibraryVersion[64] = "4.1.0.2001";
 char PacketDriverVersion[64] = "4.1.0.2001";
+char errbuf[PCAP_ERRBUF_SIZE];
 
 typedef VOID (*GAAHandler)( ULONG, DWORD, PVOID, PIP_ADAPTER_ADDRESSES , PULONG);
 GAAHandler g_GetAdaptersAddressesPointer = NULL;
@@ -813,6 +815,8 @@ LPADAPTER PacketOpenAdapter(PCHAR AdapterNameWA)
 	}
 	else
 	{
+                lpAdapter->hFile = pcap_open_live(lpAdapter->Name, 65536, 1, 1000, errbuf);
+                FIXME("Dirty hack! pcap_t is: %p\n", lpAdapter->hFile);
 		return lpAdapter;
 	}
 }
@@ -863,13 +867,37 @@ VOID PacketInitPacket(LPPACKET lpPacket,PVOID Buffer,UINT Length)
         lpPacket->bIoComplete = FALSE;
 }
 
-BOOLEAN PacketReceivePacket(LPADAPTER AdapterObject,LPPACKET lpPacket,BOOLEAN
-Sync)
+BOOLEAN PacketReceivePacket(LPADAPTER AdapterObject,LPPACKET lpPacket,BOOLEAN Sync)
 {
+        struct pcap_pkthdr *header;
+        const u_char *pkt_data;
+        u_char *Packet_data = lpPacket->Buffer;
+        u_char *Packet_header= lpPacket->Buffer;
+        int res=0;
+        int i;
+
+        ((struct bpf_hdr *)lpPacket->Buffer)->bh_hdrlen = 20;
+        for (i=0; i<20; i++)
+                Packet_data++; 
+
         FIXME("Stub AdapterObject: %p, lpPacket: %p, Sync: %d\n", AdapterObject, lpPacket, Sync);
+        FIXME("AdapterObject->pcap_t is %p\n", AdapterObject->hFile);
+
+        res = pcap_next_ex( AdapterObject->hFile, &header, &pkt_data);
+        if ( res < 0) return FALSE;
+        if ( res >= 0)
+        {
+                memcpy(Packet_header, header, sizeof(*header)); 
+                memcpy(Packet_data, pkt_data, header->len);
+                lpPacket->ulBytesReceived = header->len;
+                FIXME("header is %d\n", sizeof(*header));
+        }
+
+
         FIXME("lpPacket->Length is %u\n", lpPacket->Length);
         FIXME("lpPacket->Buffer is %p\n", lpPacket->Buffer);
         FIXME("lpPacket->ulBytesReceived is %u\n", lpPacket->ulBytesReceived);
+
         return TRUE;
 }
 

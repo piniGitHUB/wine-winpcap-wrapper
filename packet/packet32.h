@@ -119,6 +119,7 @@ typedef struct _PACKET_OID_DATA PACKET_OID_DATA, *PPACKET_OID_DATA;
 #define  BIOCSETOID 2147483648
 #define  BIOCQUERYOID 2147483652
 
+#ifdef NO_PCAP_HEADER
 struct bpf_program
 {
         UINT bf_len;
@@ -132,5 +133,13 @@ struct bpf_insn
         UCHAR   jf;
         int k;
 };
+#endif
 
+struct bpf_hdr
+{
+        struct timeval  bh_tstamp;      ///< The timestamp associated with the
+        UINT    bh_caplen;                      ///< Length of captured portion.
+        UINT    bh_datalen;                     ///< Original length of packet
+        USHORT          bh_hdrlen;              ///< Length of bpf header (this
+};
 
