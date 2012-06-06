@@ -172,11 +172,25 @@ INT CDECL wine_pcap_next_ex(pcap_t *p, struct pcap_pkthdr **pkt_header, CONST UC
 pcap_t * CDECL wine_pcap_open_live(CONST CHAR *source, INT snaplen,
                                    INT promisc , INT to_ms , CHAR *errbuf)
 {
+    CHAR device_prefix[12]="\\Device\\NPF_";
+    CONST CHAR * tmpSource;
+    if (errbuf == NULL)
+        errbuf = (CHAR*)HeapAlloc(GetProcessHeap(), 0, (PCAP_ERRBUF_SIZE));
+
     TRACE("(%p %i %i %i %p)\n", source, snaplen, promisc, to_ms, errbuf);
     FIXME("source is %s\n", source);
-    //source = source + 12;
-    //FIXME("new source is %s\n", source);
-    return pcap_open_live(source, snaplen, promisc, to_ms, errbuf);
+
+    if (strncmp(source, device_prefix, 12) == 0)
+    {
+        tmpSource = source + 12;
+        FIXME("Force remove prefix! new name is %s\n", tmpSource);
+    }
+    else
+    {
+        tmpSource = source;
+    }
+
+    return pcap_open_live(tmpSource, snaplen, promisc, to_ms, errbuf);
 }
 
 INT CDECL wine_pcap_sendpacket(pcap_t *p, CONST UCHAR *buf, INT size)

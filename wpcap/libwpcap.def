@@ -27,6 +27,7 @@ EXPORTS
   pcap_minor_version=wine_pcap_minor_version @44
   pcap_next=wine_pcap_next @45
   pcap_next_ex=wine_pcap_next_ex @47
+  pcap_open=wine_pcap_open_live @50
   pcap_open_live=wine_pcap_open_live @52
   pcap_sendpacket=wine_pcap_sendpacket @61
   pcap_set_datalink=wine_pcap_set_datalink @66
