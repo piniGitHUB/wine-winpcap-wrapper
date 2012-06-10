@@ -1,0 +1,6 @@
+MODULE    = arp.exe
+APPMODE   = -mconsole -municode
+
+C_SRCS = arp.c
+
+@MAKE_PROG_RULES@
