@@ -6,7 +6,7 @@
 4 cdecl PacketGetAdapterNames(ptr ptr)
 5 stub PacketGetAirPcapHandle
 6 cdecl PacketGetDriverVersion()
-7 cdecl PacketGetNetInfoEx(ptr ptr ptr)
+7 cdecl PacketGetNetInfoEx(str ptr ptr)
 8 cdecl PacketGetNetType(ptr ptr)
 9 stub PacketGetReadEvent
 10 stub PacketGetStats
@@ -15,7 +15,7 @@
 13 cdecl PacketInitPacket(ptr ptr long)
 14 stub PacketIsDumpEnded
 15 stub PacketLibraryVersion
-16 cdecl PacketOpenAdapter(ptr)
+16 cdecl PacketOpenAdapter(str)
 17 cdecl PacketReceivePacket(ptr ptr long)
 18 cdecl PacketRequest(ptr long ptr)
 19 cdecl PacketSendPacket(ptr ptr long)
