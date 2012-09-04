@@ -294,12 +294,6 @@ AdapterNameA + strlen(DEVICE_PREFIX));
 		}
 	}
 
-	//
-	// NOTE GV 20061114 This is a sort of breaking change. In the past we
-	// were putting what
-	// we could fit inside this variable. Now we simply put NOTHING. It's
-	// just useless
-	//
 	ZeroMemory(lpAdapter->SymbolicLink, sizeof(lpAdapter->SymbolicLink));
 
 	//try if it is possible to open the adapter immediately
@@ -827,7 +821,7 @@ LPADAPTER PacketOpenAdapter(PCHAR AdapterNameWA)
 	}
 	else
 	{
-                lpAdapter->hFile = pcap_open_live(AdapterNameA + prefix_offset, 65536, 1, 1000, errbuf);
+                lpAdapter->hFile = pcap_open_live(AdapterNameA + prefix_offset, 65536, 1, 10000, errbuf);
                 if (lpAdapter->hFile == NULL)
                 {
                         ERR("pcap_open_live error: %s \n", errbuf);
